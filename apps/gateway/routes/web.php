@@ -13,6 +13,6 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return "Auth";
-});
+use Illuminate\Support\Facades\Http;
+
+$router->post('/api/v1/auth/login', [\App\Http\Controllers\v1\AuthController::class, "login"]);

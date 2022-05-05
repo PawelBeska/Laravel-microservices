@@ -1,20 +1,23 @@
 version: '3'
+networks:
+  app-network:
+    driver: bridge
 services:
-
   webserver:
     image: nginx:alpine
     restart: unless-stopped
     tty: true
     ports:
-      - "8080:80"
+      - "8000:80"
+      - "81"
     volumes:
+      - ./apps/gateway/:/var/www/gateway
       - ./apps/auth/:/var/www/auth
       - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./docker/nginx/sites/:/etc/nginx/conf.d/
       - ./docker/nginx/ssl/:/etc/ssl/
     networks:
       - app-network
-
   auth:
     build:
       context: apps/auth
@@ -22,12 +25,26 @@ services:
     image: digitalocean.com/php
     restart: unless-stopped
     tty: true
-    environment:
-      SERVICE_NAME: auth
-      SERVICE_TAGS: dev
     working_dir: /var/www/auth
+    env_file:
+      - .env
     volumes:
       - ./apps/auth/:/var/www/auth
+      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - app-network
+  gateway:
+    build:
+      context: apps/gateway
+      dockerfile: Dockerfile
+    image: digitalocean.com/php
+    restart: unless-stopped
+    tty: true
+    working_dir: /var/www/gateway
+    env_file:
+      - .env
+    volumes:
+      - ./apps/gateway/:/var/www/gateway
       - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
       - app-network
@@ -45,7 +62,4 @@ services:
     networks:
       - app-network
 
-networks:
-  app-network:
-    driver: bridge
 

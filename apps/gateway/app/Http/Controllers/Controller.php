@@ -10,7 +10,6 @@ use Laravel\Lumen\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use ApiResponse, Reportable;
-
     public function __construct(ApiService $apiService)
     {
         $this->apiService = $apiService;

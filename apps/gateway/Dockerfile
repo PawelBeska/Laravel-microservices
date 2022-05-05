@@ -29,7 +29,7 @@ RUN pecl install zip && docker-php-ext-enable zip \
     && pecl install igbinary && docker-php-ext-enable igbinary
 
 # Set working directory
-WORKDIR /var/www/auth
+WORKDIR /var/www/gateway
 
 
 # Clear cache
@@ -43,10 +43,10 @@ RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
 
 # Copy existing application directory contents
-COPY . /var/www/auth
+COPY . /var/www/gateway
 
 # Copy existing application directory permissions
-COPY --chown=www:www . /var/www/auth
+COPY --chown=www:www . /var/www/gateway
 
 # Change current user to www
 USER www
