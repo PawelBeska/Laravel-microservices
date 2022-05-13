@@ -4,6 +4,11 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Laravel\Lumen\Console\Kernel as ConsoleKernel;
+use Sammyjo20\SaloonLaravel\Console\Commands\MakeAuthenticator;
+use Sammyjo20\SaloonLaravel\Console\Commands\MakeConnector;
+use Sammyjo20\SaloonLaravel\Console\Commands\MakePlugin;
+use Sammyjo20\SaloonLaravel\Console\Commands\MakeRequest;
+use Sammyjo20\SaloonLaravel\Console\Commands\MakeResponse;
 
 class Kernel extends ConsoleKernel
 {
@@ -13,13 +18,19 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+
+        MakeAuthenticator::class,
+        MakeConnector::class,
+        MakePlugin::class,
+        MakeRequest::class,
+        MakeResponse::class,
+
     ];
 
     /**
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @param \Illuminate\Console\Scheduling\Schedule $schedule
      * @return void
      */
     protected function schedule(Schedule $schedule)

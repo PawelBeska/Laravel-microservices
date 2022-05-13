@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1f3557ac45b616a8d730ed4c41824a7c",
+    "content-hash": "c08bb672bf98c1ebab0033fe070f61fc",
     "packages": [
         {
             "name": "brick/math",
@@ -3356,6 +3356,113 @@
                 }
             ],
             "time": "2022-03-27T21:42:02+00:00"
+        },
+        {
+            "name": "sammyjo20/saloon",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sammyjo20/Saloon.git",
+                "reference": "af934a96dd46dcfec607ebdef6d81f48cae7b3c3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Sammyjo20/Saloon/zipball/af934a96dd46dcfec607ebdef6d81f48cae7b3c3",
+                "reference": "af934a96dd46dcfec607ebdef6d81f48cae7b3c3",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.4",
+                "illuminate/support": "^8.0|^9.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.5",
+                "pestphp/pest": "^1.21",
+                "spatie/ray": "^1.33"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Sammyjo20\\Saloon\\": "src/",
+                    "Sammyjo20\\Saloon\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sammyjo20",
+                    "email": "29132017+Sammyjo20@users.noreply.github.com"
+                }
+            ],
+            "description": "A Laravel/PHP package that allows you to write your API integrations or SDKs in a beautiful, standardised syntax.",
+            "support": {
+                "issues": "https://github.com/Sammyjo20/Saloon/issues",
+                "source": "https://github.com/Sammyjo20/Saloon/tree/v1.1.0"
+            },
+            "time": "2022-04-24T17:59:01+00:00"
+        },
+        {
+            "name": "sammyjo20/saloon-laravel",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sammyjo20/saloon-laravel.git",
+                "reference": "a729c4216c5ce9b0a887d9da7efd22081e273a59"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Sammyjo20/saloon-laravel/zipball/a729c4216c5ce9b0a887d9da7efd22081e273a59",
+                "reference": "a729c4216c5ce9b0a887d9da7efd22081e273a59",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^8.0|^9.0",
+                "illuminate/support": "^8.0|^9.0",
+                "php": "^8.0",
+                "sammyjo20/saloon": "^1.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.5",
+                "orchestra/testbench": "^v6.24.0",
+                "pestphp/pest": "^1.21"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Sammyjo20\\SaloonLaravel\\SaloonServiceProvider"
+                    ],
+                    "aliases": {
+                        "Saloon": "Saloon"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Sammyjo20\\SaloonLaravel\\": "src/",
+                    "Sammyjo20\\SaloonLaravel\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sam Carré",
+                    "email": "29132017+Sammyjo20@users.noreply.github.com"
+                }
+            ],
+            "description": "Laravel package for Sammyjo20/Saloon",
+            "support": {
+                "issues": "https://github.com/Sammyjo20/saloon-laravel/issues",
+                "source": "https://github.com/Sammyjo20/saloon-laravel/tree/v1.0.0"
+            },
+            "time": "2022-04-13T22:50:28+00:00"
         },
         {
             "name": "symfony/console",
@@ -7591,5 +7698,5 @@
         "php": "^8.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }
