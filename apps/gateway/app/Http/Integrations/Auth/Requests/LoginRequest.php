@@ -5,9 +5,13 @@ namespace App\Http\Integrations\Auth\Requests;
 use App\Http\Integrations\Auth\AuthConnector;
 use Sammyjo20\Saloon\Constants\Saloon;
 use Sammyjo20\Saloon\Http\SaloonRequest;
+use Sammyjo20\Saloon\Traits\Plugins\HasJsonBody;
 
 class LoginRequest extends SaloonRequest
 {
+
+    use HasJsonBody;
+
     /**
      * The connector class.
      *
@@ -29,6 +33,6 @@ class LoginRequest extends SaloonRequest
      */
     public function defineEndpoint(): string
     {
-        return '/api/v1/login';
+        return '/login';
     }
 }

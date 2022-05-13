@@ -33,7 +33,7 @@ trait ApiResponse
      */
 
     public function errorResponse(
-        string|null $message = null,
+        array|string|null $message = null,
         int         $code = ResponseAlias::HTTP_INTERNAL_SERVER_ERROR,
         int         $status = ResponseAlias::HTTP_BAD_REQUEST,
     ): JsonResponse

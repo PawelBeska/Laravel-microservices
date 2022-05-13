@@ -7,6 +7,10 @@ use App\Http\Integrations\Auth\Requests\RegisterRequest;
 use Sammyjo20\Saloon\Http\SaloonConnector;
 use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
 
+/**
+ * @method LoginRequest loginRequest()
+ * @method RegisterRequest registerRequest()
+ */
 class AuthConnector extends SaloonConnector
 {
     use AcceptsJson;
@@ -23,7 +27,7 @@ class AuthConnector extends SaloonConnector
      */
     public function defineBaseUrl(): string
     {
-        return 'http://laravel-microservices-blockchain_auth_1/api/v1';
+        return 'http://webserver:81/api/v1';
     }
 
     /**

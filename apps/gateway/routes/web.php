@@ -15,4 +15,5 @@
 
 use Illuminate\Support\Facades\Http;
 
-$router->post('/api/v1/auth/login', [\App\Http\Controllers\v1\AuthController::class, "login"]);
+$router->post('/auth/login', "v1\\AuthController@login");
+$router->post('/auth/register', "v1\\AuthController@register");

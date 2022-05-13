@@ -15,6 +15,7 @@ class AuthController extends Controller
 {
     public function login(LoginRequest $request): JsonResponse
     {
+
         $data = $request->validated();
         try {
             if (!Auth::attempt($data)) {
@@ -34,7 +35,8 @@ class AuthController extends Controller
         } catch (Exception $e) {
             $this->reportError($e);
             return $this->errorResponse(
-                __("Something went wrong.")
+                $e->getMessage()
+                //__("Something went wrong.")
             );
         }
     }

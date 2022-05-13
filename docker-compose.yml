@@ -7,6 +7,7 @@ services:
     image: nginx:alpine
     restart: unless-stopped
     tty: true
+    container_name: webserver
     ports:
       - "8000:80"
       - "81"
@@ -52,11 +53,14 @@ services:
     image: mariadb:10.4.13
     restart: unless-stopped
     tty: true
+    container_name: auth_db
     ports:
       - "13306:3306"
     environment:
       MYSQL_DATABASE: auth_db
       MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       SERVICE_NAME: mysql
       SERVICE_TAGS: dev
     networks:
