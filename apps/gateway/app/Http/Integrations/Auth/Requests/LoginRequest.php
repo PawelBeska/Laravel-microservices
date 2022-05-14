@@ -26,6 +26,7 @@ class LoginRequest extends SaloonRequest
      */
     protected ?string $method = Saloon::POST;
 
+    
     /**
      * The endpoint of the request.
      *
