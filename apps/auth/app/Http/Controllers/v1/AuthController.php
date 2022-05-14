@@ -35,8 +35,7 @@ class AuthController extends Controller
         } catch (Exception $e) {
             $this->reportError($e);
             return $this->errorResponse(
-                $e->getMessage()
-                //__("Something went wrong.")
+                __("Something went wrong.")
             );
         }
     }
@@ -45,7 +44,7 @@ class AuthController extends Controller
     {
         $data = $request->validated();
         try {
-            $user = (new UserService())->assignData(
+            $user = $userService->assignData(
                 $data['name'],
                 $data['email'],
                 $data['password'],

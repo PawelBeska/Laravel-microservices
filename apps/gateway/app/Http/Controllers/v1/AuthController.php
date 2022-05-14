@@ -5,6 +5,7 @@ namespace App\Http\Controllers\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Integrations\Auth\AuthConnector;
 use App\Http\Integrations\Auth\Requests\LoginRequest;
+use App\Http\Integrations\Auth\Requests\RegisterRequest;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -25,20 +26,26 @@ class AuthController extends Controller
             );
         } catch (Exception $e) {
             $this->reportError($e);
-            return $this->successResponse(123);
+            return $this->errorResponse(__('Something went wrong.'));
         }
 
     }
 
     /**
      * @param \Illuminate\Http\Request $request
-     * @param \App\Http\Integrations\Auth\AuthConnector $authConnector
+     * @param \App\Http\Integrations\Auth\Requests\RegisterRequest $registerRequest
      * @return \Illuminate\Http\JsonResponse
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function register(Request $request, AuthConnector $authConnector): JsonResponse
+    public function register(Request $request, RegisterRequest $registerRequest): JsonResponse
     {
-        return $this->successResponse(
-            $authConnector->registerRequest()->setData($request->all())
-        );
+        try {
+            return $this->gatewayResponse(
+                $registerRequest->setData($request->all())->send()
+            );
+        } catch (Exception $e) {
+            $this->reportError($e);
+            return $this->errorResponse(__('Something went wrong.'));
+        }
     }
 }
