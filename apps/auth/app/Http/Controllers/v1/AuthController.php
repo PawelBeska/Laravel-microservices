@@ -5,6 +5,7 @@ namespace App\Http\Controllers\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Resources\UserResource;
 use App\Services\UserService;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -29,7 +30,7 @@ class AuthController extends Controller
                     code: ResponseAlias::HTTP_UNAUTHORIZED);
             }
             return $this->successResponse([
-                'user' => Auth::user(),
+                'user' => new UserResource(Auth::user()),
                 'access_token' => optional(Auth::user())->createToken('auth')->plainTextToken,
             ]);
         } catch (Exception $e) {
@@ -51,7 +52,7 @@ class AuthController extends Controller
                 now()
             )->getUser();
             return $this->successResponse(
-                $user
+                new UserResource($user)
             );
         } catch (Exception $e) {
             $this->reportError($e);
