@@ -13,13 +13,14 @@
 |
 */
 
-use Illuminate\Support\Facades\Http;
+use App\Http\Middleware\Authenticate;
 
 $router->post('/auth/login', "v1\\AuthController@login");
 $router->post('/auth/register', "v1\\AuthController@register");
 
 $router->group([
-    'prefix' => 'user/'
+    'prefix' => 'user/',
+    'middleware' => [Authenticate::class]
 ], function ($router) {
     $router->get('/', "v1\\UserController@index");
 });

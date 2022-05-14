@@ -2,10 +2,23 @@
 
 namespace App\Services;
 
+use App\Models\User;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Redis;
 
 class RedisService
 {
+
+
+    /**
+     * @param string $key
+     * @param int $expiration
+     * @return void
+     */
+    public function setExpiration(string $key, int $expiration): void
+    {
+        Redis::expire($key, $expiration);
+    }
 
     /**
      * @param string $key
@@ -15,6 +28,32 @@ class RedisService
     public function setEx(string $key, null|string|int $value, int $expiration): void
     {
         Redis::setex($key, $expiration, $value);
+    }
+
+    /**
+     * @param string $key
+     * @param array $array
+     * @param int $expiration
+     * @return void
+     */
+    public function setExArray(string $key, array $array, int $expiration): void
+    {
+        foreach ($array as $hashKey => $value) {
+            $this->set($key, $hashKey, $value);
+        }
+        $this->setExpiration($key, $expiration);
+    }
+
+    /**
+     * @param string $key
+     * @param array $array
+     * @return void
+     */
+    public function setArray(string $key, array $array): void
+    {
+        foreach ($array as $hashKey => $value) {
+            $this->set($key, $hashKey, $value);
+        }
     }
 
     /**
@@ -51,5 +90,31 @@ class RedisService
     public function delete(string $key): void
     {
         Redis::del($key);
+    }
+
+    /**
+     * @param string $accessToken
+     * @param \Illuminate\Contracts\Auth\Authenticatable|\App\Models\User $user
+     * @return void
+     */
+    public function setAccessToken(string $accessToken, Authenticatable|User $user): void
+    {
+        $this->setEx($accessToken, $user, 720);
+
+    }
+
+    /**
+     * @param $accessToken
+     * @return false|array
+     * @throws \JsonException
+     */
+    public function getUserByAccessToken($accessToken): ?array
+    {
+
+        $data = Redis::get($accessToken);
+        if ($data) {
+            return json_decode($data, true, 512, JSON_THROW_ON_ERROR);
+        }
+        return null;
     }
 }
