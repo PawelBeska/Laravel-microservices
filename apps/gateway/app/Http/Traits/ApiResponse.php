@@ -13,8 +13,6 @@ trait ApiResponse
     public function gatewayResponse(SaloonResponse $response): JsonResponse
     {
         $data = $response->json();
-
-        dd($data);
         return response()->json([
             'status' => Arr::get($data, 'status'),
             'message' => Arr::get($data, 'message'),
