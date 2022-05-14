@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\v1\AuthController;
+use App\Http\Controllers\v1\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,3 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
+
+Route::middleware(['auth'])->prefix('user')->group(static function () {
+    Route::get('/', [UserController::class, 'index']);
+});

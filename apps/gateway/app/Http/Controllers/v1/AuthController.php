@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Integrations\Auth\AuthConnector;
 use App\Http\Integrations\Auth\Requests\LoginRequest;
 use App\Http\Integrations\Auth\Requests\RegisterRequest;
 use Exception;

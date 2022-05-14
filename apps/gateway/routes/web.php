@@ -17,3 +17,9 @@ use Illuminate\Support\Facades\Http;
 
 $router->post('/auth/login', "v1\\AuthController@login");
 $router->post('/auth/register', "v1\\AuthController@register");
+
+$router->group([
+    'prefix' => 'user/'
+], function ($router) {
+    $router->get('/', "v1\\UserController@index");
+});
