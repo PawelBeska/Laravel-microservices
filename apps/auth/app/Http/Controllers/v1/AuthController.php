@@ -29,17 +29,11 @@ class AuthController extends Controller
                     message: __('auth.needs_email_confirmation'),
                     code: ResponseAlias::HTTP_UNAUTHORIZED);
             }
-
-            $accessToken = optional(Auth::user())->createToken('auth')->plainTextToken;
-
-            $this->redisService->setAccessToken($accessToken, Auth::user());
-
             return $this->successResponse([
                 'user' => new UserResource(Auth::user()),
-                'access_token' => $accessToken,
+                'access_token' => optional(Auth::user())->createToken('auth')->plainTextToken,
             ]);
         } catch (Exception $e) {
-
             $this->reportError($e);
             return $this->errorResponse(
                 __("Something went wrong.")

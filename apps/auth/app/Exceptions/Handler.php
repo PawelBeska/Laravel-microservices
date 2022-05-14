@@ -97,11 +97,6 @@ class Handler extends ExceptionHandler
             );
         }
 
-        return $this->errorResponse(
-            $e,
-            500
-        );
-
 
     }
 }
