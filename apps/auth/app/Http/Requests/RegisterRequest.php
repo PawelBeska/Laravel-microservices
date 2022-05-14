@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterRequest extends FormRequest
 {
@@ -11,9 +12,9 @@ class RegisterRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -24,7 +25,10 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "name" => ['required', 'string', 'min:3', 'max:64'],
+            "email" => ['required', 'string', 'email', 'unique:users,email'],
+            "password" => ['required', 'string', 'confirmed', 'min:6'],
+            "password_confirmation" => ['required', 'string', 'min:6'],
         ];
     }
 }

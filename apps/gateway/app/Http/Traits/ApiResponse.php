@@ -14,6 +14,7 @@ trait ApiResponse
     {
         $data = $response->json();
 
+        dd($data);
         return response()->json([
             'status' => Arr::get($data, 'status'),
             'message' => Arr::get($data, 'message'),
