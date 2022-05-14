@@ -20,6 +20,7 @@ services:
     networks:
       - app-network
   auth:
+    container_name: auth_service
     build:
       context: apps/auth
       dockerfile: Dockerfile
@@ -35,6 +36,7 @@ services:
     networks:
       - app-network
   gateway:
+    container_name: gateway_service
     build:
       context: apps/gateway
       dockerfile: Dockerfile
@@ -49,7 +51,7 @@ services:
       - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
       - app-network
-  db:
+  auth_db:
     image: mariadb:10.4.13
     restart: unless-stopped
     tty: true
