@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('role_permission', static function (Blueprint $table) {
+        Schema::create('permission_role', static function (Blueprint $table) {
             $table->foreignId('role_id')->constrained('roles')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('permission_id')->constrained('permissions')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

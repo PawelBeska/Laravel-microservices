@@ -1,29 +1,29 @@
 <?php
 
-namespace App\Http\Integrations\User;
+namespace App\Http\Integrations\Role;
 
-use App\Http\Integrations\User\Requests\UserDeleteRequest;
-use App\Http\Integrations\User\Requests\UserIndexRequest;
-use App\Http\Integrations\User\Requests\UserProfileRequest;
-use App\Http\Integrations\User\Requests\UserShowRequest;
-use App\Http\Integrations\User\Requests\UserStoreRequest;
-use App\Http\Integrations\User\Requests\UserUpdateRequest;
+use App\Http\Integrations\Role\Requests\RoleDeleteRequest;
+use App\Http\Integrations\Role\Requests\RoleIndexRequest;
+use App\Http\Integrations\Role\Requests\RoleShowRequest;
+use App\Http\Integrations\Role\Requests\RoleStoreRequest;
+use App\Http\Integrations\Role\Requests\RoleUpdateRequest;
 use Sammyjo20\Saloon\Http\SaloonConnector;
 use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
 
-class UserConnector extends SaloonConnector
+class RoleConnector extends SaloonConnector
 {
     use AcceptsJson;
+
 
     /**
      * @var array|string[]
      */
     protected array $requests = [
-        UserDeleteRequest::class,
-        UserIndexRequest::class,
-        UserShowRequest::class,
-        UserStoreRequest::class,
-        UserUpdateRequest::class,
+        RoleDeleteRequest::class,
+        RoleIndexRequest::class,
+        RoleShowRequest::class,
+        RoleStoreRequest::class,
+        RoleUpdateRequest::class,
     ];
 
     /**
@@ -33,7 +33,7 @@ class UserConnector extends SaloonConnector
      */
     public function defineBaseUrl(): string
     {
-        return 'http://webserver:81/api/v1';
+        return '';
     }
 
     /**

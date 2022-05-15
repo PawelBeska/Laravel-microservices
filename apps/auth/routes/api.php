@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\v1\AuthController;
 use App\Http\Controllers\v1\PermissionController;
+use App\Http\Controllers\v1\ProfileController;
 use App\Http\Controllers\v1\RoleController;
 use App\Http\Controllers\v1\UserController;
 use Illuminate\Support\Facades\Route;
@@ -21,9 +22,9 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
-Route::middleware(['auth'])->group(function () {
-    Route::prefix('user')->group(static function () {
-        Route::get('/', [UserController::class, 'index']);
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::prefix('profile')->group(static function () {
+        Route::get('/', [ProfileController::class, 'index']);
     });
     Route::apiResource('role', RoleController::class);
     Route::apiResource('permission', PermissionController::class);

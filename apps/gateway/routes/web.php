@@ -13,14 +13,27 @@
 |
 */
 
-use App\Http\Middleware\Authenticate;
+use App\Http\Controllers\v1\UserController;
 
 $router->post('/auth/login', "v1\\AuthController@login");
 $router->post('/auth/register', "v1\\AuthController@register");
 
 $router->group([
-    'prefix' => 'user/',
-    'middleware' => [Authenticate::class]
+    'middleware' => ["auth"]
 ], function ($router) {
-    $router->get('/', "v1\\UserController@index");
+
+    // PROFILE SECTION
+    $router->group(['prefix' => 'profile/'], function ($router) {
+        $router->get('/', "v1\\ProfileController@index");
+    });
+
+    // USER SECTION
+    $router->group(['prefix' => 'user/'], function ($router) {
+        $router->get('/', "v1\\UserController@index");
+    });
+
+    // PERMISSION SECTION
+    $router->group(['prefix' => 'permission/'], function ($router) {
+        $router->get('/', ['uses' => "v1\\PermissionController" . '@index', 'middleware' => ["permission:permission.read"]]);
+    });
 });

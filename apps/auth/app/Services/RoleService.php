@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Permission;
 use App\Models\Role;
 
 class RoleService
@@ -35,6 +36,16 @@ class RoleService
             $this->role->permissions()->sync($permissions);
         }
         $this->role->save();
+        return $this;
+    }
+
+    /**
+     * @param \App\Models\Permission $permission
+     * @return $this
+     */
+    public function addPermission(Permission $permission): static
+    {
+        $this->role->permissions()->syncWithoutDetaching($permission);
         return $this;
     }
 }

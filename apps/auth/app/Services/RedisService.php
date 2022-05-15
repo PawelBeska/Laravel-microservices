@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Redis;
@@ -99,7 +100,7 @@ class RedisService
      */
     public function setAccessToken(string $accessToken, Authenticatable|User $user): void
     {
-        $this->setEx($accessToken, $user, 720);
+        $this->setEx($accessToken, (new UserResource($user))->toJson(), 720);
 
     }
 

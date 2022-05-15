@@ -45,6 +45,19 @@ class RedisGuard implements Guard
         return null;
     }
 
+    /**
+     * @param $permission
+     * @return bool
+     */
+    public function hasPermission($permission): bool
+    {
+        if (!$this->user || Arr::get($this->user, 'role.permissions', false)) {
+            return false;
+        }
+        return in_array($permission, Arr::get($this->user, 'role.permissions', []), true);
+    }
+
+
     public function id()
     {
         return Arr::get($this->user, 'id');

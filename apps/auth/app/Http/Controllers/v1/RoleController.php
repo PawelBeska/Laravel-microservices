@@ -32,7 +32,7 @@ class RoleController extends Controller
     {
         try {
             return $this->successResponse(
-                new RoleCollection(Role::paginate(Arr::get($request->all(), 'per_page')))
+                new RoleCollection(Role::paginate(Arr::get($request->all(), 'per_page',15)))
             );
         } catch (Exception $e) {
             $this->reportError($e);

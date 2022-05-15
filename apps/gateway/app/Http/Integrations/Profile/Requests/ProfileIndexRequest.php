@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Integrations\User\Requests;
+namespace App\Http\Integrations\Profile\Requests;
 
-use App\Http\Integrations\User\UserConnector;
+use App\Http\Integrations\Profile\ProfileConnector;
 use Sammyjo20\Saloon\Constants\Saloon;
 use Sammyjo20\Saloon\Http\SaloonRequest;
 
-class UserIndexRequest extends SaloonRequest
+class ProfileIndexRequest extends SaloonRequest
 {
     /**
      * The connector class.
      *
      * @var string|null
      */
-    protected ?string $connector = UserConnector::class;
+    protected ?string $connector = ProfileConnector::class;
 
     /**
      * The HTTP verb the request will use.
@@ -29,6 +29,6 @@ class UserIndexRequest extends SaloonRequest
      */
     public function defineEndpoint(): string
     {
-        return 'user';
+        return '/profile';
     }
 }

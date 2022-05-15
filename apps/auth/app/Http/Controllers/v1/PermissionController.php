@@ -29,7 +29,7 @@ class PermissionController extends Controller
     {
         try {
             return $this->successResponse(
-                new PermissionCollection(Permission::paginate(Arr::get($request->all(), 'per_page')))
+                new PermissionCollection(Permission::paginate(Arr::get($request->all(), 'per_page', 15)))
             );
         } catch (Exception $e) {
             $this->reportError($e);

@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Middleware\Authenticate;
+use App\Http\Middleware\HasPermission;
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
 (new Laravel\Lumen\Bootstrap\LoadEnvironmentVariables(
@@ -76,9 +79,10 @@ $app->configure('app');
 //     App\Http\Middleware\ExampleMiddleware::class
 // ]);
 
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+$app->routeMiddleware([
+    'auth' => Authenticate::class,
+    'permission' => HasPermission::class
+]);
 
 /*
 |--------------------------------------------------------------------------

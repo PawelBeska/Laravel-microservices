@@ -1,29 +1,17 @@
 <?php
 
-namespace App\Http\Integrations\User;
+namespace App\Http\Integrations\Profile;
 
-use App\Http\Integrations\User\Requests\UserDeleteRequest;
-use App\Http\Integrations\User\Requests\UserIndexRequest;
-use App\Http\Integrations\User\Requests\UserProfileRequest;
-use App\Http\Integrations\User\Requests\UserShowRequest;
-use App\Http\Integrations\User\Requests\UserStoreRequest;
-use App\Http\Integrations\User\Requests\UserUpdateRequest;
+use App\Http\Integrations\Profile\Requests\ProfileIndexRequest;
 use Sammyjo20\Saloon\Http\SaloonConnector;
 use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
 
-class UserConnector extends SaloonConnector
+class ProfileConnector extends SaloonConnector
 {
     use AcceptsJson;
 
-    /**
-     * @var array|string[]
-     */
     protected array $requests = [
-        UserDeleteRequest::class,
-        UserIndexRequest::class,
-        UserShowRequest::class,
-        UserStoreRequest::class,
-        UserUpdateRequest::class,
+        ProfileIndexRequest::class
     ];
 
     /**

@@ -6,7 +6,7 @@ use App\Http\Integrations\User\UserConnector;
 use Sammyjo20\Saloon\Constants\Saloon;
 use Sammyjo20\Saloon\Http\SaloonRequest;
 
-class UserIndexRequest extends SaloonRequest
+class UserStoreRequest extends SaloonRequest
 {
     /**
      * The connector class.
@@ -20,7 +20,7 @@ class UserIndexRequest extends SaloonRequest
      *
      * @var string|null
      */
-    protected ?string $method = Saloon::GET;
+    protected ?string $method = Saloon::POST;
 
     /**
      * The endpoint of the request.

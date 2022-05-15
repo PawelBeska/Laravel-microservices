@@ -6,7 +6,7 @@ use App\Http\Integrations\User\UserConnector;
 use Sammyjo20\Saloon\Constants\Saloon;
 use Sammyjo20\Saloon\Http\SaloonRequest;
 
-class UserIndexRequest extends SaloonRequest
+class UserShowRequest extends SaloonRequest
 {
     /**
      * The connector class.
