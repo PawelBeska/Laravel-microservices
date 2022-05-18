@@ -23,6 +23,7 @@ RUN docker-php-ext-install \
 # configure packages
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 RUN docker-php-ext-install zip
+RUN docker-php-ext-install sockets
 
 # install additional packages from PECL
 RUN pecl install zip && docker-php-ext-enable zip \

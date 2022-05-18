@@ -9,8 +9,10 @@
         "guzzlehttp/guzzle": "^7.4",
         "illuminate/redis": "^9.12",
         "laravel/lumen-framework": "^9.0",
+        "nuwber/rabbitevents": "^7.0",
         "predis/predis": "^1.1",
-        "sammyjo20/saloon-laravel": "^1.0"
+        "sammyjo20/saloon-laravel": "^1.0",
+        "vladimir-yuldashev/laravel-queue-rabbitmq": "^12.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

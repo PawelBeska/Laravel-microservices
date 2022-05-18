@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\UserRegisteredEvent;
+use App\Jobs\ExampleJob;
+use App\Listeners\UserRegisteredListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -15,9 +18,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array<class-string, array<int, class-string>>
      */
     protected $listen = [
-        Registered::class => [
-            SendEmailVerificationNotification::class,
-        ],
+        UserRegisteredEvent::class => [
+            UserRegisteredListener::class,
+        ]
     ];
 
     /**
@@ -27,7 +30,10 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->app->bind(
+            ExampleJob::class . "@handle",
+            fn($job) => $job->handle());
+
     }
 
     /**

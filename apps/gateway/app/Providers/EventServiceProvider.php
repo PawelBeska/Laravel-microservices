@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\UserRegisteredEvent;
+use App\Jobs\ExampleJob;
+use App\Listeners\UserRegisteredListener;
 use Laravel\Lumen\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -12,10 +15,16 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        \App\Events\ExampleEvent::class => [
-            \App\Listeners\ExampleListener::class,
-        ],
+        UserRegisteredEvent::class => [
+            UserRegisteredListener::class,
+        ]
     ];
+
+    public function boot(){
+        $this->app->bind(
+            ExampleJob::class . "@handle",
+            fn($job) => $job->handle());
+    }
 
     /**
      * Determine if events and listeners should be automatically discovered.
@@ -24,6 +33,6 @@ class EventServiceProvider extends ServiceProvider
      */
     public function shouldDiscoverEvents()
     {
-        return false;
+        return true;
     }
 }
