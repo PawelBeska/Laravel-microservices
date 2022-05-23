@@ -6,10 +6,11 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
-class ExampleJob implements ShouldQueue
+class RabbitCalledJob implements ShouldQueue
 {
-    use  InteractsWithQueue, Queueable, SerializesModels;
+    use InteractsWithQueue, Queueable, SerializesModels;
 
     /**
      * Create a new job instance.
@@ -26,8 +27,8 @@ class ExampleJob implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
+    public function handle(...$data)
     {
-        echo "Event has been handled.";
+        Log::info($data);
     }
 }

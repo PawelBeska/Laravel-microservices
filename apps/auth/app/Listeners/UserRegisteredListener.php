@@ -11,6 +11,9 @@ class UserRegisteredListener implements ShouldQueue
 {
     use InteractsWithQueue;
 
+    public $queue = 'exchange';
+
+
     /**
      * Create the event listener.
      *

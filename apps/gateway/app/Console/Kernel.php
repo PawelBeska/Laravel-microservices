@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\GatewayInstallCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Laravel\Lumen\Console\Kernel as ConsoleKernel;
 use RabbitEvents\Foundation\Commands\InstallCommand;
@@ -32,6 +33,7 @@ class Kernel extends ConsoleKernel
         EventsListCommand::class,
         ObserverMakeCommand::class,
         ListenCommand::class,
+        GatewayInstallCommand::class
 
 
     ];
