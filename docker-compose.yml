@@ -2,6 +2,7 @@ version: '3'
 networks:
   default:
     driver: bridge
+
 services:
   webserver:
     image: nginx:alpine

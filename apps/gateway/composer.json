@@ -9,9 +9,10 @@
         "guzzlehttp/guzzle": "^7.4",
         "illuminate/redis": "^9.12",
         "laravel/lumen-framework": "^9.0",
-        "nuwber/rabbitevents": "^7.0",
         "predis/predis": "^1.1",
+        "queue-interop/amqp-interop": "^0.8.2",
         "sammyjo20/saloon-laravel": "^1.0",
+        "spatie/laravel-ray": "^1.29",
         "vladimir-yuldashev/laravel-queue-rabbitmq": "^12.0"
     },
     "require-dev": {

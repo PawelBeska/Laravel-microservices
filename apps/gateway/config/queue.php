@@ -1,5 +1,7 @@
 <?php
 
+use Interop\Amqp\AmqpTopic;
+
 return [
 
     /*
@@ -68,7 +70,7 @@ return [
                      * Read more about possible values at https://www.rabbitmq.com/tutorials/amqp-concepts.html
                      */
 
-                    'type' => env('RABBITMQ_EXCHANGE_TYPE', \Interop\Amqp\AmqpTopic::TYPE_FANOUT),
+                    'type' => env('RABBITMQ_EXCHANGE_TYPE', AmqpTopic::TYPE_FANOUT),
                     'passive' => env('RABBITMQ_EXCHANGE_PASSIVE', false),
                     'durable' => env('RABBITMQ_EXCHANGE_DURABLE', true),
                     'auto_delete' => env('RABBITMQ_EXCHANGE_AUTODELETE', false),

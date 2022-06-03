@@ -32,6 +32,7 @@ class AuthController extends Controller
 
             $accessToken = optional(Auth::user())->createToken('auth')->plainTextToken;
 
+
             $this->redisService->setAccessToken($accessToken, Auth::user());
 
             return $this->successResponse([
