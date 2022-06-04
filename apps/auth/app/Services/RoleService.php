@@ -23,19 +23,20 @@ class RoleService
 
     /**
      * @param string $name
-     * @param array $permissions
+     * @param array|null $permissions
      * @return $this
      */
     public function assignData(
         string $name,
-        array  $permissions = []
+        ?array $permissions = []
     ): static
     {
         $this->role->name = $name;
+        $this->role->save();
+
         if ($permissions) {
             $this->role->permissions()->sync($permissions);
         }
-        $this->role->save();
         return $this;
     }
 

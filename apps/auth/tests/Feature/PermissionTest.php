@@ -6,7 +6,6 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Services\PermissionService;
 use App\Services\UserService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
@@ -128,9 +127,6 @@ class PermissionTest extends TestCase
             'description' => $this->faker->text,
         ];
         $response = $this->post('/api/v1/permission', $data);
-
-        ray()->green()->json($response->getContent());
-
         $response->assertStatus(200);
         $response->assertJsonStructure([
             "status",
@@ -158,7 +154,6 @@ class PermissionTest extends TestCase
             $data['description']
         )->getPermission();
         $response = $this->delete('/api/v1/permission/'. $permission->id);
-
         $response->assertStatus(200);
         $response->assertJsonStructure([
             "status",

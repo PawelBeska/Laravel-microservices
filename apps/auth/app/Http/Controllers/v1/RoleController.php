@@ -32,7 +32,7 @@ class RoleController extends Controller
     {
         try {
             return $this->successResponse(
-                new RoleCollection(Role::paginate(Arr::get($request->all(), 'per_page', 15)))
+                new RoleCollection(Role::with(['permissions'])->paginate(Arr::get($request->all(), 'per_page', 15)))
             );
         } catch (Exception $e) {
             $this->reportError($e);
@@ -74,7 +74,7 @@ class RoleController extends Controller
             $role = (new RoleService($role))
                 ->assignData(
                     $data['name'],
-                    $data['permissions']
+                    Arr::get($data, 'permissions')
                 )->getRole();
 
             return $this->successResponse(
@@ -102,7 +102,7 @@ class RoleController extends Controller
             $role = $roleService
                 ->assignData(
                     $data['name'],
-                    $data['permissions']
+                    Arr::get($data, 'permissions')
                 )->getRole();
 
             return $this->successResponse(
