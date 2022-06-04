@@ -12,13 +12,15 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 
 class PermissionController extends Controller
 {
     public function __construct()
     {
-        parent::__construct();
+
         $this->authorizeResource(Permission::class, 'permission');
+        parent::__construct();
     }
 
     /**

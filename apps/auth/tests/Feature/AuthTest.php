@@ -11,6 +11,9 @@ class AuthTest extends TestCase
 
     use WithFaker;
 
+    /**
+     * @return void
+     */
     public function test_login_when_user_is_not_active(): void
     {
         $email = $this->faker->email;
@@ -34,7 +37,9 @@ class AuthTest extends TestCase
             ]
         );
     }
-
+    /**
+     * @return void
+     */
     public function test_login_when_user_is_active(): void
     {
         $email = $this->faker->email;
@@ -96,7 +101,9 @@ class AuthTest extends TestCase
         ]);
     }
 
-
+    /**
+     * @return void
+     */
     public function test_logout(): void
     {
         $user = (new UserService())->assignData(

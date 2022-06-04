@@ -19,7 +19,7 @@ class RolePolicy
     public function viewAny(User $user): bool
     {
         return $user->hasPermission(
-            'role.view'
+            'role.read'
         );
     }
 
@@ -33,7 +33,7 @@ class RolePolicy
     public function view(User $user, Role $role): bool
     {
         return $user->hasPermission(
-            'role.view'
+            'role.read'
         );
     }
 
