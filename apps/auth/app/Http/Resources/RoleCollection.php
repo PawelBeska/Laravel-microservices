@@ -6,6 +6,12 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 use JetBrains\PhpStorm\ArrayShape;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
+/**
+ * @method total()
+ * @method perPage()
+ * @method currentPage()
+ * @method lastPage()
+ */
 class RoleCollection extends ResourceCollection
 {
     /**

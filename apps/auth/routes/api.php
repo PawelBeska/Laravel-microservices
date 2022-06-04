@@ -27,6 +27,7 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('profile')->group(static function () {
         Route::get('/', [ProfileController::class, 'index']);
     });
+    Route::apiResource('user', UserController::class);
     Route::apiResource('role', RoleController::class);
     Route::apiResource('permission', PermissionController::class);
 });

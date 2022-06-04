@@ -5,7 +5,12 @@ namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use JetBrains\PhpStorm\ArrayShape;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-
+/**
+ * @method total()
+ * @method perPage()
+ * @method currentPage()
+ * @method lastPage()
+ */
 class PermissionCollection extends ResourceCollection
 {
     /**

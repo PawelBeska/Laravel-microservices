@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use JetBrains\PhpStorm\ArrayShape;
 
 class PermissionResource extends JsonResource
 {
@@ -10,9 +11,10 @@ class PermissionResource extends JsonResource
      * Transform the resource into an array.
      *
      * @param \Illuminate\Http\Request $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+     * @return array
      */
-    public function toArray($request)
+    #[ArrayShape(['id' => "mixed", 'name' => "mixed", 'description' => "mixed"])]
+    public function toArray($request): array
     {
         return [
             'id' => $this->id,

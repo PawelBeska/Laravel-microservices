@@ -15,9 +15,9 @@ class UserService
     }
 
     /**
-     * @return \Illuminate\Contracts\Auth\Authenticatable|\App\Models\User
+     * @return \App\Models\User
      */
-    public function getUser(): Authenticatable|User
+    public function getUser(): User
     {
         return $this->user;
     }
