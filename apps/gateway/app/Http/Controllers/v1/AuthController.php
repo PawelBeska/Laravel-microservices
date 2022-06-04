@@ -19,6 +19,7 @@ class AuthController extends Controller
      */
     public function login(Request $request, LoginRequest $loginRequest): JsonResponse
     {
+        ray($request);
         try {
             return $this->gatewayResponse(
                 $loginRequest->setData($request->all())->send()

@@ -9,11 +9,16 @@ use App\Http\Resources\UserResource;
 use App\Services\UserService;
 use Exception;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class AuthController extends Controller
 {
+    /**
+     * @param \App\Http\Requests\LoginRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function login(LoginRequest $request): JsonResponse
     {
 
@@ -48,6 +53,11 @@ class AuthController extends Controller
         }
     }
 
+    /**
+     * @param \App\Http\Requests\RegisterRequest $request
+     * @param \App\Services\UserService $userService
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function register(RegisterRequest $request, UserService $userService): JsonResponse
     {
         $data = $request->validated();
@@ -60,6 +70,24 @@ class AuthController extends Controller
             )->getUser();
             return $this->successResponse(
                 new UserResource($user)
+            );
+        } catch (Exception $e) {
+            $this->reportError($e);
+            return $this->errorResponse(
+                __("Something went wrong.")
+            );
+        }
+    }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function logout(): JsonResponse
+    {
+        try {
+            optional(Auth::user())->tokens()->delete();
+            return $this->successResponse(
+                null
             );
         } catch (Exception $e) {
             $this->reportError($e);
