@@ -115,7 +115,7 @@ class PermissionController extends Controller
      * @param \App\Models\Permission $permission
      * @return \Illuminate\Http\JsonResponse
      */
-    public function delete(Permission $permission): JsonResponse
+    public function destroy(Permission $permission): JsonResponse
     {
         try {
             $permission->delete();

@@ -32,7 +32,7 @@ class RoleController extends Controller
     {
         try {
             return $this->successResponse(
-                new RoleCollection(Role::paginate(Arr::get($request->all(), 'per_page',15)))
+                new RoleCollection(Role::paginate(Arr::get($request->all(), 'per_page', 15)))
             );
         } catch (Exception $e) {
             $this->reportError($e);
@@ -107,6 +107,25 @@ class RoleController extends Controller
 
             return $this->successResponse(
                 new RoleResource($role)
+            );
+        } catch (Exception $e) {
+            $this->reportError($e);
+            return $this->errorResponse(
+                __("Something went wrong.")
+            );
+        }
+    }
+
+    /**
+     * @param \App\Models\Role $role
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy(Role $role): JsonResponse
+    {
+        try {
+            $role->delete();
+            return $this->successResponse(
+                null
             );
         } catch (Exception $e) {
             $this->reportError($e);

@@ -143,4 +143,28 @@ class PermissionTest extends TestCase
         ]);
         $this->assertDatabaseHas(Permission::class, $data);
     }
+
+    /**
+     * @return void
+     */
+    public function test_delete_permission(): void
+    {
+        $data = [
+            'name' => $this->faker->name,
+            'description' => $this->faker->text,
+        ];
+        $permission = (new PermissionService())->assignData(
+            $data['name'],
+            $data['description']
+        )->getPermission();
+        $response = $this->delete('/api/v1/permission/'. $permission->id);
+
+        $response->assertStatus(200);
+        $response->assertJsonStructure([
+            "status",
+            "data",
+            "code"
+        ]);
+        $this->assertDatabaseMissing(Permission::class, $data);
+    }
 }
