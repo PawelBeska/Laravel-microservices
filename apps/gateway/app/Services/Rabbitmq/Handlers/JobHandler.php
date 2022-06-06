@@ -6,7 +6,9 @@ use App\Interfaces\RabbitEventInterface;
 use App\Interfaces\RabbitJobInterface;
 use App\Interfaces\RabbitmqHandlerInterface;
 
-class EventHandler implements RabbitmqHandlerInterface {
+class JobHandler implements RabbitmqHandlerInterface
+{
+
 
     /**
      * @param \App\Interfaces\RabbitEventInterface|\App\Interfaces\RabbitJobInterface $action
@@ -22,7 +24,8 @@ class EventHandler implements RabbitmqHandlerInterface {
      */
     public function handle(...$data): void
     {
-
         $this->action->handle(...$data);
     }
+
+
 }

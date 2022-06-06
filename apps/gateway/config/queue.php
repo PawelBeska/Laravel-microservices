@@ -1,5 +1,6 @@
 <?php
 
+use App\Services\Rabbitmq\RabbitmqHandler;
 use Interop\Amqp\AmqpTopic;
 
 return [
@@ -100,7 +101,7 @@ return [
                     'exclusive' => env('RABBITMQ_QUEUE_EXCLUSIVE', false),
                     'auto_delete' => env('RABBITMQ_QUEUE_AUTODELETE', false),
                     'arguments' => env('RABBITMQ_QUEUE_ARGUMENTS'),
-                    'job' => \App\Jobs\BaseRabbitMqJob::class,
+                    'job' => RabbitmqHandler::class,
                 ],
             ],
 

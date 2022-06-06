@@ -2,6 +2,7 @@
 
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\HasPermission;
+use Spatie\LaravelRay\RayServiceProvider;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -100,7 +101,7 @@ $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(App\Providers\EventServiceProvider::class);
 $app->register(Illuminate\Redis\RedisServiceProvider::class);
 $app->register(VladimirYuldashev\LaravelQueueRabbitMQ\LaravelQueueRabbitMQServiceProvider::class);
-
+$app->register(RayServiceProvider::class);
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes

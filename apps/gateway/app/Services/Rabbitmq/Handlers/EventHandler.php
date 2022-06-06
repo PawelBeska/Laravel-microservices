@@ -22,7 +22,7 @@ class EventHandler implements RabbitmqHandlerInterface {
      */
     public function handle(...$data): void
     {
-
+        ray($data)->orange();
         $this->action->handle(...$data);
     }
 }

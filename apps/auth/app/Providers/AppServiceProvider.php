@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Illuminate\Queue\Events\JobFailed;
+use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+       // Queue::failing(function (JobFailed $event) {
+       //     ray(1);
+       // });
     }
 }

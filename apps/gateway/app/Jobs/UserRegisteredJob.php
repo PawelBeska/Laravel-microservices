@@ -2,15 +2,16 @@
 
 namespace App\Jobs;
 
+use App\Interfaces\RabbitJobInterface;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 
-class RabbitCalledJob implements ShouldQueue
+class UserRegisteredJob implements ShouldQueue, RabbitJobInterface
 {
-    use InteractsWithQueue, Queueable, SerializesModels;
+    use  InteractsWithQueue, Queueable, SerializesModels;
 
     /**
      * Create a new job instance.
@@ -27,8 +28,9 @@ class RabbitCalledJob implements ShouldQueue
      *
      * @return void
      */
-    public function handle(...$data)
+    public function handle(...$data): void
     {
-        Log::info($data);
+        Log::info(1);
+        ray($data)->green();
     }
 }

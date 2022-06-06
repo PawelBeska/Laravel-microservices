@@ -2,9 +2,12 @@
 
 namespace App\Console\Commands;
 
+use App\Enum\RabbitmqHandlerEnum;
 use App\Jobs\RabbitCalledJob;
 use App\Services\RabbitMQService;
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
+use App\Jobs\UserRegisteredJob;
 
 class TestJob extends Command
 {
@@ -29,6 +32,13 @@ class TestJob extends Command
      */
     public function handle()
     {
-        RabbitMQService::runJob(RabbitCalledJob::class,['test'=>true]);
+        RabbitMQService::dispatch(
+            UserRegisteredJob::class,
+            RabbitmqHandlerEnum::JOB,
+            [
+                'data' => "data",
+            ],
+        );
+        return 1;
     }
 }
