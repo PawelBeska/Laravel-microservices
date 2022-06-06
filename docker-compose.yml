@@ -32,20 +32,6 @@ services:
     volumes:
       - ./apps/auth/:/var/www/auth
       - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
-  gateway:
-    container_name: gateway_service
-    build:
-      context: apps/gateway
-      dockerfile: Dockerfile
-    image: digitalocean.com/php
-    restart: unless-stopped
-    tty: true
-    working_dir: /var/www/gateway
-    env_file:
-      - .env
-    volumes:
-      - ./apps/gateway/:/var/www/gateway
-      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
   auth_db:
     image: mariadb:10.4.13
     restart: unless-stopped
@@ -62,6 +48,31 @@ services:
       SERVICE_TAGS: dev
     volumes:
       - ./docker/mysql/auth:/var/lib/mysql
+  gateway:
+    container_name: gateway_service
+    build:
+      context: apps/gateway
+      dockerfile: Dockerfile
+    image: digitalocean.com/php
+    restart: unless-stopped
+    tty: true
+    working_dir: /var/www/gateway
+    env_file:
+      - .env
+    volumes:
+      - ./apps/gateway/:/var/www/gateway
+      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+  gateway_db:
+    container_name: gateway_db
+    image: mongo:latest
+    ports:
+      - 27017
+    volumes:
+      - ./docker/mongo/gateway_db/:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${GATEWAY_MONGO_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${GATEWAY_MONGO_PASSWORD}
+      - MONGO_INITDB_DATABASE=${GATEWAY_MONGO_DATABASE}
   redis:
     image: redis
     container_name: redis

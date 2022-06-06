@@ -13,7 +13,6 @@
 |
 */
 
-use App\Http\Controllers\v1\UserController;
 
 $router->post('/auth/login', "v1\\AuthController@login");
 $router->post('/auth/register', "v1\\AuthController@register");
