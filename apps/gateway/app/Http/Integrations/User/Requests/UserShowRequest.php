@@ -29,6 +29,14 @@ class UserShowRequest extends SaloonRequest
      */
     public function defineEndpoint(): string
     {
-        return 'user';
+        return '/' . $this->id;
     }
+
+    /**
+     * @param string $id
+     */
+    public function __construct(
+        public string $id,
+    )
+    {}
 }

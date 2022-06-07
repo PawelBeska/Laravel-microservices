@@ -29,6 +29,14 @@ class RoleShowRequest extends SaloonRequest
      */
     public function defineEndpoint(): string
     {
-        return 'role';
+        return '/' . $this->id;
     }
+
+    /**
+     * @param string $id
+     */
+    public function __construct(
+        public string $id,
+    )
+    {}
 }

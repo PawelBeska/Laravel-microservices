@@ -29,6 +29,14 @@ class PermissionUpdateRequest extends SaloonRequest
      */
     public function defineEndpoint(): string
     {
-        return 'permission';
+        return '/' . $this->id;
     }
+
+    /**
+     * @param string $id
+     */
+    public function __construct(
+        public string $id,
+    )
+    {}
 }

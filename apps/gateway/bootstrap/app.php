@@ -3,6 +3,7 @@
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\HasPermission;
 use App\Http\Middleware\RouteStatisticsMiddleware;
+use Sammyjo20\Saloon\Http\SaloonRequest;
 use Spatie\LaravelRay\RayServiceProvider;
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -106,8 +107,14 @@ $app->register(RayServiceProvider::class);
 $app->register(Jenssegers\Mongodb\MongodbServiceProvider::class);
 
 
-
 $app->withEloquent();
+
+
+$app->when(SaloonRequest::class)
+    ->needs('$id')
+    ->give(function () {
+        return request()->get('id');
+    });
 
 /*
 |--------------------------------------------------------------------------
@@ -123,7 +130,7 @@ $app->withEloquent();
 $app->router->group([
     'prefix' => "api/v1",
     'namespace' => 'App\Http\Controllers',
-    'middleware' => ["statistics"],
+    //'middleware' => ["statistics"],
 ], function ($router) {
     require __DIR__ . '/../routes/web.php';
 });

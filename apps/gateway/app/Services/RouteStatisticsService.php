@@ -92,7 +92,7 @@ class RouteStatisticsService
      * @return string
      */
 
-    private function getKeyByParameterType(string $type, string $key, $value): string
+    private function getKeyByParameterType(string $type, string $key, $value): string|array
     {
         if (($type === RouteStatistic::BIND) && $value instanceof Model) {
             return get_class($value);
@@ -109,7 +109,7 @@ class RouteStatisticsService
      */
 
 
-    private function getValueByParameterType($type, string $key, $value): string
+    private function getValueByParameterType($type, string $key, $value): string|array
     {
         if ($type === RouteStatistic::BIND && $value instanceof Model) {
             return $value->id;

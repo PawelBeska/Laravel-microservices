@@ -22,13 +22,4 @@ class PermissionStoreRequest extends SaloonRequest
      */
     protected ?string $method = Saloon::POST;
 
-    /**
-     * The endpoint of the request.
-     *
-     * @return string
-     */
-    public function defineEndpoint(): string
-    {
-        return 'permission';
-    }
 }

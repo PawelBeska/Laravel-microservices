@@ -28,11 +28,18 @@ $router->group([
 
     // USER SECTION
     $router->group(['prefix' => 'user/'], function ($router) {
-        $router->get('/', "v1\\UserController@index");
+        apiResource($router,'v1\\UserController','user');
     });
 
     // PERMISSION SECTION
     $router->group(['prefix' => 'permission/'], function ($router) {
-        $router->get('/', ['uses' => "v1\\PermissionController" . '@index', 'middleware' => ["permission:permission.read"]]);
+        apiResource($router,'v1\\PermissionController','permission');
     });
+
+    // ROLE SECTION
+    $router->group(['prefix' => 'role/'], function ($router) {
+        apiResource($router,'v1\\RoleController','role');
+    });
+
+
 });

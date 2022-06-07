@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Integrations\Role\Requests;
+namespace App\Http\Integrations\Permission\Requests;
 
-use App\Http\Integrations\Role\RoleConnector;
+use App\Http\Integrations\Permission\PermissionConnector;
 use Sammyjo20\Saloon\Constants\Saloon;
 use Sammyjo20\Saloon\Http\SaloonRequest;
 
-class RoleDeleteRequest extends SaloonRequest
+class PermissionDestroyRequest extends SaloonRequest
 {
     /**
      * The connector class.
      *
      * @var string|null
      */
-    protected ?string $connector = RoleConnector::class;
+    protected ?string $connector = PermissionConnector::class;
 
     /**
      * The HTTP verb the request will use.
@@ -29,6 +29,14 @@ class RoleDeleteRequest extends SaloonRequest
      */
     public function defineEndpoint(): string
     {
-        return 'role';
+        return '/' . $this->id;
     }
+
+    /**
+     * @param string $id
+     */
+    public function __construct(
+        public string $id,
+    )
+    {}
 }
