@@ -29,14 +29,8 @@ class RoleDestroyRequest extends SaloonRequest
      */
     public function defineEndpoint(): string
     {
-        return '/' . $this->id;
+        return '/' . request()->role;
     }
 
-    /**
-     * @param string $id
-     */
-    public function __construct(
-        public string $id,
-    )
-    {}
+
 }

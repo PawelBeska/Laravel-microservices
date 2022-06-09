@@ -1,5 +1,9 @@
 <?php
 
+use App\Contracts\IntegrationRequestInterface;
+use App\Http\Integrations\Permission\Requests\PermissionDestroyRequest;
+use App\Http\Integrations\Permission\Requests\PermissionShowRequest;
+use App\Http\Integrations\Permission\Requests\PermissionUpdateRequest;
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\HasPermission;
 use App\Http\Middleware\RouteStatisticsMiddleware;
@@ -109,12 +113,6 @@ $app->register(Jenssegers\Mongodb\MongodbServiceProvider::class);
 
 $app->withEloquent();
 
-
-$app->when(SaloonRequest::class)
-    ->needs('$id')
-    ->give(function () {
-        return request()->get('id');
-    });
 
 /*
 |--------------------------------------------------------------------------

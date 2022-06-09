@@ -12,13 +12,13 @@ function reportError(Throwable $exception): void
     );
 }
 
-function apiResource(Router $router, string $action, string $permission)
+function apiResource(Router $router, string $action, string $permission, string $parameter)
 {
     $router->get('/', ['uses' => "$action@index", 'middleware' => ["permission:$permission.read"]]);
-    $router->get('/{id}', ['uses' => "$action@show", 'middleware' => ["permission:$permission.read"]]);
+    $router->get('/{'.$parameter.'}', ['uses' => "$action@show", 'middleware' => ["permission:$permission.read"]]);
     $router->post('/', ['uses' => "$action@store", 'middleware' => ["permission:$permission.create"]]);
-    $router->delete('/{id}', ['uses' => "$action@destroy", 'middleware' => ["permission:$permission.delete"]]);
-    $router->patch('/{id}', ['uses' => "$action@update", 'middleware' => ["permission:$permission.update"]]);
+    $router->delete('/{'.$parameter.'}', ['uses' => "$action@destroy", 'middleware' => ["permission:$permission.delete"]]);
+    $router->put('/{'.$parameter.'}', ['uses' => "$action@update", 'middleware' => ["permission:$permission.update"]]);
 }
 
 

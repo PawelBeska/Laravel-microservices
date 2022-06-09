@@ -29,14 +29,7 @@ class UserDestroyRequest extends SaloonRequest
      */
     public function defineEndpoint(): string
     {
-        return '/' . $this->id;
+        return '/' . request()->user;
     }
 
-    /**
-     * @param string $id
-     */
-    public function __construct(
-        public string $id,
-    )
-    {}
 }

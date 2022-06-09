@@ -2,6 +2,8 @@
 
 namespace App\Http\Integrations\Permission\Requests;
 
+use App\Contracts\ApiRequestInterface;
+use App\Contracts\IntegrationRequestInterface;
 use App\Http\Integrations\Permission\PermissionConnector;
 use Sammyjo20\Saloon\Constants\Saloon;
 use Sammyjo20\Saloon\Http\SaloonRequest;
@@ -29,14 +31,7 @@ class PermissionDestroyRequest extends SaloonRequest
      */
     public function defineEndpoint(): string
     {
-        return '/' . $this->id;
+        return '/' . request()->permission;
     }
 
-    /**
-     * @param string $id
-     */
-    public function __construct(
-        public string $id,
-    )
-    {}
 }

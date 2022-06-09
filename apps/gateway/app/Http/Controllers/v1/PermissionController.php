@@ -3,17 +3,15 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Integrations\Permission\Requests\PermissionDeleteRequest;
 use App\Http\Integrations\Permission\Requests\PermissionDestroyRequest;
 use App\Http\Integrations\Permission\Requests\PermissionIndexRequest;
 use App\Http\Integrations\Permission\Requests\PermissionShowRequest;
 use App\Http\Integrations\Permission\Requests\PermissionStoreRequest;
 use App\Http\Integrations\Permission\Requests\PermissionUpdateRequest;
-use App\Http\Integrations\User\Requests\UserIndexRequest;
 use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use PHPUnit\Util\Json;
 
 class PermissionController extends Controller
 {
@@ -21,28 +19,31 @@ class PermissionController extends Controller
      * @param \Illuminate\Http\Request $request
      * @param \App\Http\Integrations\Permission\Requests\PermissionIndexRequest $permissionIndexRequest
      * @return \Illuminate\Http\JsonResponse
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function index(Request $request, PermissionIndexRequest $permissionIndexRequest): JsonResponse
     {
-        ray(1);
         try {
             return $this->gatewayResponse(
                 $permissionIndexRequest->withTokenAuth($request->bearerToken())->send()
             );
-        } catch (Exception $e) {
+        } catch (GuzzleException|Exception $e) {
             $this->reportError($e);
             return $this->errorResponse(__('Something went wrong.'));
         }
     }
 
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Http\Integrations\Permission\Requests\PermissionShowRequest $permissionShowRequest
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function show(Request $request, PermissionShowRequest $permissionShowRequest): JsonResponse
     {
         try {
             return $this->gatewayResponse(
                 $permissionShowRequest->withTokenAuth($request->bearerToken())->send()
             );
-        } catch (Exception $e) {
+        } catch (GuzzleException|Exception $e) {
             $this->reportError($e);
             return $this->errorResponse(__('Something went wrong.'));
         }
@@ -55,29 +56,48 @@ class PermissionController extends Controller
      */
     public function store(Request $request, PermissionStoreRequest $permissionStoreRequest): JsonResponse
     {
-
+        try {
+            return $this->gatewayResponse(
+                $permissionStoreRequest->setData($request->toArray())->withTokenAuth($request->bearerToken())->send()
+            );
+        } catch (GuzzleException|Exception $e) {
+            $this->reportError($e);
+            return $this->errorResponse(__('Something went wrong.'));
+        }
     }
 
     /**
-     * @param int $id
      * @param \Illuminate\Http\Request $request
      * @param \App\Http\Integrations\Permission\Requests\PermissionUpdateRequest $permissionUpdateRequest
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, PermissionUpdateRequest $permissionUpdateRequest):JsonResponse
+    public function update(Request $request, PermissionUpdateRequest $permissionUpdateRequest): JsonResponse
     {
-
+        try {
+            return $this->gatewayResponse(
+                $permissionUpdateRequest->setData($request->toArray())->withTokenAuth($request->bearerToken())->send()
+            );
+        } catch (GuzzleException|Exception $e) {
+            $this->reportError($e);
+            return $this->errorResponse(__('Something went wrong.'));
+        }
     }
 
     /**
-     * @param int $id
      * @param \Illuminate\Http\Request $request
      * @param \App\Http\Integrations\Permission\Requests\PermissionDestroyRequest $permissionDestroyRequest
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Request $request, PermissionDestroyRequest $permissionDestroyRequest):JsonResponse
+    public function destroy(Request $request, PermissionDestroyRequest $permissionDestroyRequest): JsonResponse
     {
-
+        try {
+            return $this->gatewayResponse(
+                $permissionDestroyRequest->withTokenAuth($request->bearerToken())->send()
+            );
+        } catch (GuzzleException|Exception $e) {
+            $this->reportError($e);
+            return $this->errorResponse(__('Something went wrong.'));
+        }
     }
 
 

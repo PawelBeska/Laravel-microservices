@@ -28,17 +28,17 @@ $router->group([
 
     // USER SECTION
     $router->group(['prefix' => 'user/'], function ($router) {
-        apiResource($router,'v1\\UserController','user');
+        apiResource($router,'v1\\UserController','user','user');
     });
 
     // PERMISSION SECTION
     $router->group(['prefix' => 'permission/'], function ($router) {
-        apiResource($router,'v1\\PermissionController','permission');
+        apiResource($router,'v1\\PermissionController','permission','permission');
     });
 
     // ROLE SECTION
     $router->group(['prefix' => 'role/'], function ($router) {
-        apiResource($router,'v1\\RoleController','role');
+        apiResource($router,'v1\\RoleController','role','role');
     });
 
 
