@@ -10,6 +10,7 @@
         "illuminate/redis": "^9.12",
         "jenssegers/mongodb": "^3.9",
         "laravel/lumen-framework": "^9.0",
+        "laravel/tinker": "^2.7",
         "predis/predis": "^1.1",
         "queue-interop/amqp-interop": "^0.8.2",
         "sammyjo20/saloon-laravel": "^1.0",

@@ -31,13 +31,7 @@ class RouteStatisticsService
             ->where('date', '<=', Carbon::now()->toDateTimeString())
             ->where('method', $request->getMethod())
             ->where('route', $request->getRequestUri())
-            ->when(Auth::check(), function (Builder $q) {
-                return $q->whereHasMorph('userable', [User::class], function (Builder $q) {
-                    $q->where('id', Auth::id());
-                });
-            }, function (Builder $q) use ($request) {
-                return $q->where('ip', $request->getClientIp());
-            })
+            ->where('ip', $request->getClientIp())
             ->firstOrCreate(
                 [
                     'method' => $request->getMethod(),
@@ -55,7 +49,6 @@ class RouteStatisticsService
             $this->routeStatistic->save();
         }
 
-
         $this->incrementOrAssignAttributes(Arr::except($request->request->all(), config('routestatistics.excluded_parameters')), RouteStatistic::QUERY);
         $this->incrementOrAssignAttributes(optional($request->route())->parameters(), RouteStatistic::BIND);
         return $this;
@@ -67,21 +60,22 @@ class RouteStatisticsService
      * @return $this
      */
 
-    public function incrementOrAssignAttributes(array $parameters, string $type): self
+    public function incrementOrAssignAttributes(?array $parameters, string $type): self
     {
 
-        foreach ($parameters as $key => $value) {
-            $this->routeStatistic
-                ->parameters()
-                ->where('type', $type)
-                ->firstOrCreate([
-                    'route_statistic_id' => $this->routeStatistic->id,
-                    'type' => $type,
-                    'key' => $this->getKeyByParameterType($type, $key, $value),
-                    'value' => $this->getValueByParameterType($type, $key, $value)
-                ])->increment('counter');
+        if ($parameters) {
+            foreach ($parameters as $key => $value) {
+                $this->routeStatistic
+                    ->parameters()
+                    ->where('type', $type)
+                    ->firstOrCreate([
+                        'route_statistic_id' => $this->routeStatistic->id,
+                        'type' => $type,
+                        'key' => $this->getKeyByParameterType($type, $key, $value),
+                        'value' => $this->getValueByParameterType($type, $key, $value)
+                    ])->increment('counter');
+            }
         }
-
         return $this;
     }
 

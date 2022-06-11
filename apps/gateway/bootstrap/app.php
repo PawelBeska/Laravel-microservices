@@ -69,7 +69,7 @@ $app->singleton(
 */
 
 $app->configure('app');
-
+$app->configure('tinker');
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
@@ -109,8 +109,7 @@ $app->register(Illuminate\Redis\RedisServiceProvider::class);
 $app->register(VladimirYuldashev\LaravelQueueRabbitMQ\LaravelQueueRabbitMQServiceProvider::class);
 $app->register(RayServiceProvider::class);
 $app->register(Jenssegers\Mongodb\MongodbServiceProvider::class);
-
-
+$app->register(\Laravel\Tinker\TinkerServiceProvider::class);
 $app->withEloquent();
 
 
@@ -128,7 +127,7 @@ $app->withEloquent();
 $app->router->group([
     'prefix' => "api/v1",
     'namespace' => 'App\Http\Controllers',
-    //'middleware' => ["statistics"],
+    'middleware' => ["statistics"],
 ], function ($router) {
     require __DIR__ . '/../routes/web.php';
 });
