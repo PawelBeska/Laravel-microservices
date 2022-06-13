@@ -27,13 +27,6 @@ class RouteStatistic extends Model
         'counter',
     ];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
-     */
-    public function userable(): MorphTo
-    {
-        return $this->morphTo();
-    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

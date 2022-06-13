@@ -40,14 +40,15 @@ class RouteStatisticsService
                     'ip' => $request->getClientIp(),
                 ],
                 [
-                    'date' => Carbon::now(),
+                    'date' => Carbon::now()->toDateTimeString(),
                 ]
             );
         $this->routeStatistic->increment('counter');
 
         if (Auth::check()) {
-            $this->routeStatistic->userable()->associate(Auth::user());
+            $this->routeStatistic->user =Auth::user();
             $this->routeStatistic->save();
+
         }
 
         $this->incrementOrAssignAttributes(Arr::except($request->request->all(), config('app.route-statistics.excluded_parameters')), RouteStatistic::QUERY);
