@@ -11,7 +11,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  * @method currentPage()
  * @method lastPage()
  */
-class RouteStatisticsCollection extends ResourceCollection
+class RouteStatisticParamCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.

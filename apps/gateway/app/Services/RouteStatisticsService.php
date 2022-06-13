@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class RouteStatisticsService
 {
@@ -49,7 +50,7 @@ class RouteStatisticsService
             $this->routeStatistic->save();
         }
 
-        $this->incrementOrAssignAttributes(Arr::except($request->request->all(), config('routestatistics.excluded_parameters')), RouteStatistic::QUERY);
+        $this->incrementOrAssignAttributes(Arr::except($request->request->all(), config('app.route-statistics.excluded_parameters')), RouteStatistic::QUERY);
         $this->incrementOrAssignAttributes(optional($request->route())->parameters(), RouteStatistic::BIND);
         return $this;
     }

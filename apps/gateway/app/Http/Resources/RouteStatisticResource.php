@@ -18,8 +18,13 @@ class RouteStatisticResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'description' => $this->description,
+            "method" => $this->method,
+            "type" => $this->type,
+            "route" => $this->route,
+            "ip" => $this->ip,
+            "date" => $this->date,
+            "counter" => $this->counter,
+            "params" => RouteStatisticParamResource::collection($this->parameters),
         ];
     }
 }
