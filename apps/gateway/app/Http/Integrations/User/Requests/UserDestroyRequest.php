@@ -6,7 +6,7 @@ use App\Http\Integrations\User\UserConnector;
 use Sammyjo20\Saloon\Constants\Saloon;
 use Sammyjo20\Saloon\Http\SaloonRequest;
 
-class UserDeleteRequest extends SaloonRequest
+class UserDestroyRequest extends SaloonRequest
 {
     /**
      * The connector class.
@@ -29,6 +29,7 @@ class UserDeleteRequest extends SaloonRequest
      */
     public function defineEndpoint(): string
     {
-        return 'user';
+        return '/' . request()->user;
     }
+
 }

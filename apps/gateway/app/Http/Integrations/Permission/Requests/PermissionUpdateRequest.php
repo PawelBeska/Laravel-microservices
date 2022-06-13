@@ -5,9 +5,11 @@ namespace App\Http\Integrations\Permission\Requests;
 use App\Http\Integrations\Permission\PermissionConnector;
 use Sammyjo20\Saloon\Constants\Saloon;
 use Sammyjo20\Saloon\Http\SaloonRequest;
+use Sammyjo20\Saloon\Traits\Plugins\HasJsonBody;
 
 class PermissionUpdateRequest extends SaloonRequest
 {
+    use HasJsonBody;
     /**
      * The connector class.
      *
@@ -29,6 +31,6 @@ class PermissionUpdateRequest extends SaloonRequest
      */
     public function defineEndpoint(): string
     {
-        return 'permission';
+        return '/' . request()->permission;
     }
 }

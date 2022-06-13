@@ -29,6 +29,7 @@ class UserShowRequest extends SaloonRequest
      */
     public function defineEndpoint(): string
     {
-        return 'user';
+        return '/' . request()->user;
     }
+
 }

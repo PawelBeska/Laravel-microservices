@@ -2,7 +2,7 @@
 
 namespace App\Http\Integrations\Role;
 
-use App\Http\Integrations\Role\Requests\RoleDeleteRequest;
+use App\Http\Integrations\Role\Requests\RoleDestroyRequest;
 use App\Http\Integrations\Role\Requests\RoleIndexRequest;
 use App\Http\Integrations\Role\Requests\RoleShowRequest;
 use App\Http\Integrations\Role\Requests\RoleStoreRequest;
@@ -19,7 +19,7 @@ class RoleConnector extends SaloonConnector
      * @var array|string[]
      */
     protected array $requests = [
-        RoleDeleteRequest::class,
+        RoleDestroyRequest::class,
         RoleIndexRequest::class,
         RoleShowRequest::class,
         RoleStoreRequest::class,
@@ -33,7 +33,7 @@ class RoleConnector extends SaloonConnector
      */
     public function defineBaseUrl(): string
     {
-        return '';
+        return 'http://webserver:81/api/v1/role';
     }
 
     /**

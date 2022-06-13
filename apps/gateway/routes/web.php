@@ -13,7 +13,6 @@
 |
 */
 
-use App\Http\Controllers\v1\UserController;
 
 $router->post('/auth/login', "v1\\AuthController@login");
 $router->post('/auth/register', "v1\\AuthController@register");
@@ -29,11 +28,24 @@ $router->group([
 
     // USER SECTION
     $router->group(['prefix' => 'user/'], function ($router) {
-        $router->get('/', "v1\\UserController@index");
+        apiResource($router, 'v1\\UserController', 'user', 'user');
     });
 
     // PERMISSION SECTION
     $router->group(['prefix' => 'permission/'], function ($router) {
-        $router->get('/', ['uses' => "v1\\PermissionController" . '@index', 'middleware' => ["permission:permission.read"]]);
+        apiResource($router, 'v1\\PermissionController', 'permission', 'permission');
     });
+
+    // ROLE SECTION
+    $router->group(['prefix' => 'role/'], function ($router) {
+        apiResource($router, 'v1\\RoleController', 'role', 'role');
+    });
+
+    // ROUTE STATISTICS SECTION
+    $router->group(['prefix' => 'route-statistics/'], function ($router) {
+        $router->get('/', ['uses' => "v1\\RouteStatisticController@index", 'middleware' => ["permission:route_statistics.read"]]);
+        $router->get('/{routeStatistics}', ['uses' => "v1\\RouteStatisticController@show", 'middleware' => ["permission:route_statistics.read"]]);
+    });
+
+
 });

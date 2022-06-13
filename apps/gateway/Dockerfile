@@ -10,6 +10,9 @@ RUN apt-get update && apt-get install -y \
     libjpeg-dev \
     libzip-dev \
     libfreetype6-dev \
+    libcurl4-openssl-dev  \
+    pkg-config  \
+    libssl-dev \
     $PHPIZE_DEPS
 
 # compile native PHP packages
@@ -26,8 +29,12 @@ RUN docker-php-ext-install zip
 RUN docker-php-ext-install sockets
 
 # install additional packages from PECL
-RUN pecl install zip && docker-php-ext-enable zip \
-    && pecl install igbinary && docker-php-ext-enable igbinary
+RUN pecl install zip
+RUN docker-php-ext-enable zip
+RUN pecl install igbinary
+RUN docker-php-ext-enable igbinary
+RUN pecl install mongodb
+RUN  docker-php-ext-enable mongodb
 
 # Set working directory
 WORKDIR /var/www/gateway

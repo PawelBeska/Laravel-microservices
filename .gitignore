@@ -26,3 +26,4 @@ Homestead.json
 /.idea
 deploy.sh
 dump.rdb
+docker/mongo/

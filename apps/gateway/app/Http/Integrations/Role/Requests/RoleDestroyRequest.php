@@ -6,7 +6,7 @@ use App\Http\Integrations\Role\RoleConnector;
 use Sammyjo20\Saloon\Constants\Saloon;
 use Sammyjo20\Saloon\Http\SaloonRequest;
 
-class RoleDeleteRequest extends SaloonRequest
+class RoleDestroyRequest extends SaloonRequest
 {
     /**
      * The connector class.
@@ -29,6 +29,8 @@ class RoleDeleteRequest extends SaloonRequest
      */
     public function defineEndpoint(): string
     {
-        return 'role';
+        return '/' . request()->role;
     }
+
+
 }

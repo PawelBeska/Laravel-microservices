@@ -4,21 +4,19 @@ namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PermissionStoreRequest;
-use App\Http\Resources\PermissionCollection;
-use App\Http\Resources\PermissionResource;
+use App\Http\Resources\RouteStatisticCollection;
+use App\Http\Resources\RouteStatisticResource;
 use App\Models\Permission;
 use App\Services\PermissionService;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Auth;
 
 class PermissionController extends Controller
 {
-    public function __construct()
+    public function __construct(Request $request)
     {
-
         $this->authorizeResource(Permission::class, 'permission');
         parent::__construct();
     }
@@ -31,7 +29,7 @@ class PermissionController extends Controller
     {
         try {
             return $this->successResponse(
-                new PermissionCollection(Permission::paginate(Arr::get($request->all(), 'per_page', 15)))
+                new RouteStatisticCollection(Permission::paginate(Arr::get($request->all(), 'per_page', 15)))
             );
         } catch (Exception $e) {
             $this->reportError($e);
@@ -49,7 +47,7 @@ class PermissionController extends Controller
     {
         try {
             return $this->successResponse(
-                new PermissionResource($permission)
+                new RouteStatisticResource($permission)
             );
         } catch (Exception $e) {
             $this->reportError($e);
@@ -75,7 +73,7 @@ class PermissionController extends Controller
             )->getPermission();
 
             return $this->successResponse(
-                new PermissionResource($permission)
+                new RouteStatisticResource($permission)
             );
         } catch (Exception $e) {
             $this->reportError($e);
@@ -101,7 +99,7 @@ class PermissionController extends Controller
             )->getPermission();
 
             return $this->successResponse(
-                new PermissionResource($permission)
+                new RouteStatisticResource($permission)
             );
         } catch (Exception $e) {
             $this->reportError($e);
@@ -117,6 +115,7 @@ class PermissionController extends Controller
      */
     public function destroy(Permission $permission): JsonResponse
     {
+
         try {
             $permission->delete();
             return $this->successResponse(

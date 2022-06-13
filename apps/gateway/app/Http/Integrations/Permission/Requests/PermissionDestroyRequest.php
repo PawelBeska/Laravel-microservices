@@ -2,11 +2,13 @@
 
 namespace App\Http\Integrations\Permission\Requests;
 
+use App\Contracts\ApiRequestInterface;
+use App\Contracts\IntegrationRequestInterface;
 use App\Http\Integrations\Permission\PermissionConnector;
 use Sammyjo20\Saloon\Constants\Saloon;
 use Sammyjo20\Saloon\Http\SaloonRequest;
 
-class PermissionDeleteRequest extends SaloonRequest
+class PermissionDestroyRequest extends SaloonRequest
 {
     /**
      * The connector class.
@@ -29,6 +31,7 @@ class PermissionDeleteRequest extends SaloonRequest
      */
     public function defineEndpoint(): string
     {
-        return '/api/v1/user';
+        return '/' . request()->permission;
     }
+
 }

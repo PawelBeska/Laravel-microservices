@@ -1,7 +1,13 @@
 <?php
 
+use App\Contracts\IntegrationRequestInterface;
+use App\Http\Integrations\Permission\Requests\PermissionDestroyRequest;
+use App\Http\Integrations\Permission\Requests\PermissionShowRequest;
+use App\Http\Integrations\Permission\Requests\PermissionUpdateRequest;
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\HasPermission;
+use App\Http\Middleware\RouteStatisticsMiddleware;
+use Sammyjo20\Saloon\Http\SaloonRequest;
 use Spatie\LaravelRay\RayServiceProvider;
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -29,7 +35,6 @@ $app = new Laravel\Lumen\Application(
 
 $app->withFacades();
 
-$app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -64,7 +69,7 @@ $app->singleton(
 */
 
 $app->configure('app');
-
+$app->configure('tinker');
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
@@ -82,7 +87,8 @@ $app->configure('app');
 
 $app->routeMiddleware([
     'auth' => Authenticate::class,
-    'permission' => HasPermission::class
+    'permission' => HasPermission::class,
+    'statistics' => RouteStatisticsMiddleware::class
 ]);
 
 /*
@@ -102,6 +108,11 @@ $app->register(App\Providers\EventServiceProvider::class);
 $app->register(Illuminate\Redis\RedisServiceProvider::class);
 $app->register(VladimirYuldashev\LaravelQueueRabbitMQ\LaravelQueueRabbitMQServiceProvider::class);
 $app->register(RayServiceProvider::class);
+$app->register(Jenssegers\Mongodb\MongodbServiceProvider::class);
+$app->register(\Laravel\Tinker\TinkerServiceProvider::class);
+$app->withEloquent();
+
+
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes
@@ -116,6 +127,7 @@ $app->register(RayServiceProvider::class);
 $app->router->group([
     'prefix' => "api/v1",
     'namespace' => 'App\Http\Controllers',
+    'middleware' => ["statistics"],
 ], function ($router) {
     require __DIR__ . '/../routes/web.php';
 });

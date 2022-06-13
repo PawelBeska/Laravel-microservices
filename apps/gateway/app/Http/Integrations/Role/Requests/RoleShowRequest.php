@@ -29,6 +29,7 @@ class RoleShowRequest extends SaloonRequest
      */
     public function defineEndpoint(): string
     {
-        return 'role';
+        return '/' . request()->role;
     }
+
 }

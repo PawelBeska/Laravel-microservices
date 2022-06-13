@@ -5,9 +5,11 @@ namespace App\Http\Integrations\User\Requests;
 use App\Http\Integrations\User\UserConnector;
 use Sammyjo20\Saloon\Constants\Saloon;
 use Sammyjo20\Saloon\Http\SaloonRequest;
+use Sammyjo20\Saloon\Traits\Plugins\HasJsonBody;
 
 class UserStoreRequest extends SaloonRequest
 {
+    use HasJsonBody;
     /**
      * The connector class.
      *
@@ -22,13 +24,4 @@ class UserStoreRequest extends SaloonRequest
      */
     protected ?string $method = Saloon::POST;
 
-    /**
-     * The endpoint of the request.
-     *
-     * @return string
-     */
-    public function defineEndpoint(): string
-    {
-        return 'user';
-    }
 }

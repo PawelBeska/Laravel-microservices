@@ -2,9 +2,8 @@
 
 namespace App\Http\Integrations\User;
 
-use App\Http\Integrations\User\Requests\UserDeleteRequest;
+use App\Http\Integrations\User\Requests\UserDestroyRequest;
 use App\Http\Integrations\User\Requests\UserIndexRequest;
-use App\Http\Integrations\User\Requests\UserProfileRequest;
 use App\Http\Integrations\User\Requests\UserShowRequest;
 use App\Http\Integrations\User\Requests\UserStoreRequest;
 use App\Http\Integrations\User\Requests\UserUpdateRequest;
@@ -19,7 +18,7 @@ class UserConnector extends SaloonConnector
      * @var array|string[]
      */
     protected array $requests = [
-        UserDeleteRequest::class,
+        UserDestroyRequest::class,
         UserIndexRequest::class,
         UserShowRequest::class,
         UserStoreRequest::class,
@@ -33,7 +32,7 @@ class UserConnector extends SaloonConnector
      */
     public function defineBaseUrl(): string
     {
-        return 'http://webserver:81/api/v1';
+        return 'http://webserver:81/api/v1/user';
     }
 
     /**
