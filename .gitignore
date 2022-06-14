@@ -27,3 +27,6 @@ Homestead.json
 deploy.sh
 dump.rdb
 docker/mongo/
+docker/mysql/notification
+apps/notification/.editorconfig
+apps/notification/.styleci.yml
