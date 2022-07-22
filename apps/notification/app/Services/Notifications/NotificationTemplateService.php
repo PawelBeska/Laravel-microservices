@@ -2,6 +2,8 @@
 
 namespace App\Services\Notifications;
 
+use App\Enum\NotificationTemplateTypeEnum;
+use App\Enums\NotificationTemplateStatusEnum;
 use App\Models\NotificationTemplate;
 
 class NotificationTemplateService
@@ -22,16 +24,31 @@ class NotificationTemplateService
     }
 
     /**
+     * @param string $name
+     * @param string $description
+     * @param \App\Enum\NotificationTemplateTypeEnum $type
+     * @param \App\Enums\NotificationTemplateStatusEnum $status
      * @param array $data
      * @return $this
      */
-    public function assignData(array $data): static
+    public function assignData(
+        string                         $name,
+        string                         $description,
+        NotificationTemplateTypeEnum   $type,
+        NotificationTemplateStatusEnum $status,
+        array                          $data = []
+    ): static
     {
-        $this->notificationTemplate->name = $data['name'];
-        $this->notificationTemplate->description = $data['description'];
-        $this->notificationTemplate->type = $data['type'];
-        $this->notificationTemplate->status = $data['status'];
+        $this->notificationTemplate->name = $name;
+        $this->notificationTemplate->description = $description;
+        $this->notificationTemplate->type = $type;
+        $this->notificationTemplate->status = $status;
         $this->notificationTemplate->save();
+        $this->notificationTemplate->data()->delete();
+        $this->notificationTemplate->data()->createMany(
+            $data
+        );
+
         return $this;
     }
 

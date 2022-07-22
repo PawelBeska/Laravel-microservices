@@ -19,7 +19,9 @@ class NotificationTemplateController extends Controller
 
     public function index(): JsonResponse
     {
+        try{
 
+        }
     }
 
     public function show(NotificationTemplate $notificationTemplate): JsonResponse
