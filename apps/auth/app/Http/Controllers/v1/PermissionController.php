@@ -4,8 +4,8 @@ namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PermissionStoreRequest;
-use App\Http\Resources\RouteStatisticCollection;
-use App\Http\Resources\RouteStatisticResource;
+use App\Http\Resources\PermissionCollection;
+use App\Http\Resources\PermissionResource;
 use App\Models\Permission;
 use App\Services\PermissionService;
 use Exception;
@@ -29,7 +29,7 @@ class PermissionController extends Controller
     {
         try {
             return $this->successResponse(
-                new RouteStatisticCollection(Permission::paginate(Arr::get($request->all(), 'per_page', 15)))
+                new PermissionCollection(Permission::paginate(Arr::get($request->all(), 'per_page', 15)))
             );
         } catch (Exception $e) {
             $this->reportError($e);
@@ -47,7 +47,7 @@ class PermissionController extends Controller
     {
         try {
             return $this->successResponse(
-                new RouteStatisticResource($permission)
+                new PermissionResource($permission)
             );
         } catch (Exception $e) {
             $this->reportError($e);
@@ -73,7 +73,7 @@ class PermissionController extends Controller
             )->getPermission();
 
             return $this->successResponse(
-                new RouteStatisticResource($permission)
+                new PermissionResource($permission)
             );
         } catch (Exception $e) {
             $this->reportError($e);
@@ -99,7 +99,7 @@ class PermissionController extends Controller
             )->getPermission();
 
             return $this->successResponse(
-                new RouteStatisticResource($permission)
+                new PermissionResource($permission)
             );
         } catch (Exception $e) {
             $this->reportError($e);

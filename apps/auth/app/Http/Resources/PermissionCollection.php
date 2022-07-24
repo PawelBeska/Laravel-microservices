@@ -23,7 +23,7 @@ class PermissionCollection extends ResourceCollection
     public function toArray($request): array
     {
         return [
-            'data' => RouteStatisticResource::collection($this->collection),
+            'data' => PermissionResource::collection($this->collection),
             'pagination' => [
                 'total' => $this->total(),
                 'count' => $this->count(),

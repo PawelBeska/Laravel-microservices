@@ -14,6 +14,7 @@ trait Reportable
      */
     public function reportError(Throwable $exception, int $exceptionLevel = 1) : void
     {
+        ray($exception);
         Log::error(
             $exception->getMessage()
             . PHP_EOL . 'IN LINE: ' . $exception->getLine()

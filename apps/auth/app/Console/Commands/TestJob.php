@@ -37,12 +37,10 @@ class TestJob extends Command
             "App\Jobs\SendRecievedNotificationJob",
             RabbitmqHandlerEnum::JOB,
             [
+                'notification_template_name' => "registration",
+                'user' => User::first(),
                 'data' => [
-                    'notification_template_name' => "registration",
-                    'user' => User::first(),
-                    'data' => [
-                        'name' => 'test',
-                    ]
+                    'name' => 'test',
                 ]
             ],
         );

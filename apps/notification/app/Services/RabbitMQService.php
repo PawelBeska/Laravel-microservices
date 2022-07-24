@@ -31,7 +31,7 @@ class RabbitMQService
                 "@type" => $type->value,
                 "delay" => $delay,
                 "uuid" => Str::uuid(),
-                ...$data
+                "data" => $data,
             ], JSON_THROW_ON_ERROR), config('queue.connections.rabbitmq.queue'), [
                 'exchange' => config('queue.connections.rabbitmq.options.exchange.name'),
                 'exchange_type' => config('queue.connections.rabbitmq.exchange.type'),

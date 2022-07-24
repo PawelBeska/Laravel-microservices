@@ -38,7 +38,8 @@ class PermissionTest extends TestCase
     {
         $response = $this->get('/api/v1/permission');
 
-        ray($response->json())->green();
+
+
         $response->assertStatus(200);
         $response->assertJsonStructure([
             "status",

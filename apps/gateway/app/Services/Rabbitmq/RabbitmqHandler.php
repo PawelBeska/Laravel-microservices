@@ -19,7 +19,7 @@ class RabbitmqHandler extends BaseJob
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      * @throws \JsonException
      */
-    public function fire()
+    public function fire(): void
     {
         $payload = $this->payload();
 
