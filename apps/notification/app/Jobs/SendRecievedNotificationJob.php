@@ -33,16 +33,15 @@ class SendRecievedNotificationJob implements ShouldQueue, RabbitJobInterface
     /**
      * Execute the job.
      *
-     * @param mixed ...$data
+     * @param mixed $data
      * @return void
      */
-    public function handle(...$data): void
+    public function handle($data): void
     {
-        ray($data)->orange();
         EmailNotificationSendJob::dispatch(
-            Arr::get($data, 'data.data', []),
-            Arr::get($data, 'data.user.email', []),
-            NotificationTemplate::query()->where('name', Arr::get($data, 'data.notification_template_name'))->firstOrFail(),
+            Arr::get($data, 'data', []),
+            Arr::get($data, 'user.email', []),
+            NotificationTemplate::query()->where('name', Arr::get($data, 'notification_template_name'))->firstOrFail(),
         );
     }
 }

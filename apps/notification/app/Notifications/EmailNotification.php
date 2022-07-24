@@ -46,9 +46,8 @@ class EmailNotification extends Notification implements ShouldQueue
      */
     public function via($notifiable): array
     {
-            return ['mail'];
+        return ['mail'];
     }
-
 
 
     /**
@@ -58,6 +57,7 @@ class EmailNotification extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
+        $templateData = $this->notificationTemplate->data;
 
         $mail = (new MailMessage)
             ->greeting(null)
@@ -66,16 +66,16 @@ class EmailNotification extends Notification implements ShouldQueue
                 Str::replace(
                     array_keys($this->data),
                     array_values($this->data),
-                    optional($this->notificationTemplate->translationable()->firstWhere('type', '=', 'title'))->translation)
+                    optional($templateData->firstWhere('key', 'title'))->getTranslation('value', 'pl'))
             )
             ->line(new HtmlString(
                     Str::replace(
                         array_keys($this->data),
                         array_values($this->data),
-                        optional($this->notificationTemplate->translationable()->firstWhere('type', '=', 'content'))->translation))
+                        optional($templateData->firstWhere('key', 'content'))->getTranslation('value', 'pl')))
             );
         if (Arr::get($this->data, 'button', false)) {
-            $mail->action(new HtmlString(optional($this->notificationTemplate->translationable()->firstWhere('type', '=', 'buttonText'))->translation), Arr::get($this->data, 'button'));
+            $mail->action(new HtmlString(optional($templateData->firstWhere('key', '=', 'buttonText'))->getTranslation('value', 'pl')), Arr::get($this->data, 'button'));
         }
 
         if ($this->from) {
@@ -90,6 +90,7 @@ class EmailNotification extends Notification implements ShouldQueue
             }
         }
         return $mail;
+
 
     }
 

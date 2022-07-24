@@ -4,13 +4,15 @@ namespace App\Services\Rabbitmq;
 
 use App\Enum\RabbitmqHandlerEnum;
 use App\Interfaces\RabbitmqHandlerInterface;
+use App\Jobs\EmailNotificationSendJob;
+use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Arr;
 use VladimirYuldashev\LaravelQueueRabbitMQ\Queue\Jobs\RabbitMQJob as BaseJob;
 
 class RabbitmqHandler extends BaseJob
 {
-    use  SerializesModels;
+    use Dispatchable, SerializesModels;
 
     /**
      * Fire the job.
@@ -23,7 +25,7 @@ class RabbitmqHandler extends BaseJob
     {
         $payload = $this->payload();
 
-        ($this->instance = $this->strategy())->handle($payload);
+        ($this->instance = $this->strategy())->handle($payload['data']);
         $this->delete();
     }
 

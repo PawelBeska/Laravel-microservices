@@ -4,6 +4,7 @@ namespace App\Services\Rabbitmq;
 
 use App\Enum\RabbitmqHandlerEnum;
 use App\Interfaces\RabbitmqHandlerInterface;
+use App\Jobs\EmailNotificationSendJob;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Arr;
@@ -20,11 +21,11 @@ class RabbitmqHandler extends BaseJob
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      * @throws \JsonException
      */
-    public function fire()
+    public function fire(): void
     {
         $payload = $this->payload();
 
-        ($this->instance = $this->strategy())->handle($payload);
+        ($this->instance = $this->strategy())->handle($payload['data']);
         $this->delete();
     }
 

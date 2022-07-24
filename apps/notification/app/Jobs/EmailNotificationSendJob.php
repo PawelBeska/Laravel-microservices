@@ -14,9 +14,9 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Notification;
 
-class EmailNotificationSendJob implements ShouldQueue
+class EmailNotificationSendJob
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable, SerializesModels;
 
     /**
      * Create a new job instance.
@@ -44,14 +44,14 @@ class EmailNotificationSendJob implements ShouldQueue
     {
 
         if ($this->notifiable instanceof Model) {
-            $this->notifiable->notify(new EmailNotification(
+            $this->notifiable->notifyNow(new EmailNotification(
                     data: $this->data,
                     notificationTemplate: $this->notificationTemplate,
                     files: $this->files,
                 )
             );
         } else if ($this->notifiable instanceof Collection) {
-            Notification::send($this->notifiable,
+            Notification::sendNow($this->notifiable,
                 new EmailNotification(
                     data: $this->data,
                     notificationTemplate: $this->notificationTemplate,
@@ -59,14 +59,16 @@ class EmailNotificationSendJob implements ShouldQueue
                 )
             );
         } else {
-            Notification::route('mail', $this->notifiable)
-                ->notify(new EmailNotification(
-                        data: $this->data,
-                        notificationTemplate: $this->notificationTemplate,
-                        files: $this->files,
-                        from: $this->from,
-                    )
-                );
+
+
+           Notification::route('mail', $this->notifiable)
+               ->notifyNow(new EmailNotification(
+                       data: $this->data,
+                       notificationTemplate: $this->notificationTemplate,
+                       files: $this->files,
+                       from: $this->from,
+                   )
+               );
         }
 
     }

@@ -11,4 +11,6 @@ class NotificationTemplateData extends Model
     use HasFactory, HasTranslations;
 
     public $translatable = ['value'];
+
+
 }
