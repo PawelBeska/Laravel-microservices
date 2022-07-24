@@ -27,18 +27,23 @@ $router->group([
     });
 
     // USER SECTION
-    $router->group(['prefix' => 'user/'], function ($router) {
+    $router->group(['prefix' => 'users/'], function ($router) {
         apiResource($router, 'v1\\UserController', 'user', 'user');
     });
 
     // PERMISSION SECTION
-    $router->group(['prefix' => 'permission/'], function ($router) {
+    $router->group(['prefix' => 'permissions/'], function ($router) {
         apiResource($router, 'v1\\PermissionController', 'permission', 'permission');
     });
 
     // ROLE SECTION
-    $router->group(['prefix' => 'role/'], function ($router) {
+    $router->group(['prefix' => 'roles/'], function ($router) {
         apiResource($router, 'v1\\RoleController', 'role', 'role');
+    });
+
+    // NOTIFICATION TEMPLATES SECTION
+    $router->group(['prefix' => 'notification-templates/'], function ($router) {
+        apiResource($router, 'v1\\RoleController', 'notification-template', 'notificationTemplate');
     });
 
     // ROUTE STATISTICS SECTION
