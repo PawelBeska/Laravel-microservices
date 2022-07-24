@@ -114,6 +114,7 @@ class AuthTest extends TestCase
         )->getUser();
         $this->actingAs($user, 'api');
         $response = $this->get('/api/v1/logout');
+
         $response->assertStatus(200);
         $response->assertJsonStructure(
             [

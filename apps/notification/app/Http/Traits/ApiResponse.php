@@ -14,7 +14,7 @@ trait ApiResponse
      */
 
     public function successResponse(
-        mixed $data,
+        mixed $data = null,
         int   $customStatusCode = ResponseAlias::HTTP_OK
     ): JsonResponse
     {
@@ -34,8 +34,8 @@ trait ApiResponse
 
     public function errorResponse(
         array|string|null $message = null,
-        int         $code = ResponseAlias::HTTP_INTERNAL_SERVER_ERROR,
-        int         $status = ResponseAlias::HTTP_BAD_REQUEST,
+        int               $code = ResponseAlias::HTTP_INTERNAL_SERVER_ERROR,
+        int               $status = ResponseAlias::HTTP_BAD_REQUEST,
     ): JsonResponse
     {
         return response()->json([

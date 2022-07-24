@@ -14,6 +14,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        (new ACLseeder())->run();
+        (new AdminNotificationTemplatesPermissionsSeeder())->run();
+        (new AdminRouteStatisticsPermissionsSeeder())->run();
+        (new AdminUserPermissionsSeeder())->run();
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

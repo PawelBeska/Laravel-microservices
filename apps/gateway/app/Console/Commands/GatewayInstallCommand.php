@@ -32,8 +32,11 @@ class GatewayInstallCommand extends Command
 
         Artisan::call("rabbitmq:queue-declare auth_queue");
         Artisan::call("rabbitmq:queue-declare gateway_queue");
+        Artisan::call("rabbitmq:queue-declare notification_queue");
 
         Artisan::call("rabbitmq:queue-bind auth_queue application-x");
         Artisan::call("rabbitmq:queue-bind gateway_queue application-x");
+
+        Artisan::call("rabbitmq:queue-bind notification_queue application-x");
     }
 }

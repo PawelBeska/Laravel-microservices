@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Enum\RabbitmqHandlerEnum;
 use App\Jobs\RabbitCalledJob;
+use App\Models\User;
 use App\Services\RabbitMQService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
@@ -33,10 +34,16 @@ class TestJob extends Command
     public function handle()
     {
         RabbitMQService::dispatch(
-            UserRegisteredJob::class,
+            "App\Jobs\SendRecievedNotificationJob",
             RabbitmqHandlerEnum::JOB,
             [
-                'data' => "data",
+                'data' => [
+                    'notification_template_name' => "registration",
+                    'user' => User::first(),
+                    'data' => [
+                        'name' => 'test',
+                    ]
+                ]
             ],
         );
         return 1;

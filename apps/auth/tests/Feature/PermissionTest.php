@@ -28,6 +28,7 @@ class PermissionTest extends TestCase
             })->first()
         )->getUser();
         $this->actingAs($this->user, 'api');
+
     }
 
     /**
@@ -36,6 +37,8 @@ class PermissionTest extends TestCase
     public function test_get_all_permissions(): void
     {
         $response = $this->get('/api/v1/permission');
+
+        ray($response->json())->green();
         $response->assertStatus(200);
         $response->assertJsonStructure([
             "status",

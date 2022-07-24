@@ -19,5 +19,6 @@ trait Reportable
             . PHP_EOL . 'IN LINE: ' . $exception->getLine()
             . PHP_EOL . 'IN FILE: ' . $exception->getFile()
         );
+        ray($exception);
     }
 }

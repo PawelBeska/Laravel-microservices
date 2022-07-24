@@ -10,6 +10,9 @@ class NotificationTemplateService
 {
 
 
+    /**
+     * @param \App\Models\NotificationTemplate $notificationTemplate
+     */
     public function __construct(private NotificationTemplate $notificationTemplate = new NotificationTemplate())
     {
 

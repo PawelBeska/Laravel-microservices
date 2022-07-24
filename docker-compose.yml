@@ -27,7 +27,6 @@ services:
     build:
       context: apps/auth
       dockerfile: Dockerfile
-    image: digitalocean.com/php
     restart: unless-stopped
     tty: true
     working_dir: /var/www/auth
@@ -59,7 +58,6 @@ services:
     build:
       context: apps/gateway
       dockerfile: Dockerfile
-    image: digitalocean.com/php
     restart: unless-stopped
     tty: true
     working_dir: /var/www/gateway
@@ -86,7 +84,6 @@ services:
     build:
       context: apps/notification
       dockerfile: Dockerfile
-    image: digitalocean.com/php
     restart: unless-stopped
     tty: true
     working_dir: /var/www/notification
