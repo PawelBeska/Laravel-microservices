@@ -12,11 +12,10 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('notification_templates', function (Blueprint $table) {
+        Schema::create('movies', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable(false);
-            $table->text('description')->nullable(false);
-            $table->string('type')->nullable(false);
+            $table->string('title')->nullable(false);
+            $table->string('description')->nullable(false);
             $table->string('status')->nullable(false);
             $table->timestamps();
         });
@@ -29,6 +28,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('notification_templates');
+        Schema::dropIfExists('movies');
     }
 };

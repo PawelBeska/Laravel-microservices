@@ -13,7 +13,7 @@ services:
       - "8000:80"
       - "81"
       - "82"
-      - "83"
+      - "83:83"
     volumes:
       - ./apps/gateway/:/var/www/gateway
       - ./apps/auth/:/var/www/auth

@@ -74,7 +74,7 @@ return [
         ],
 
         'redis' => [
-            'driver' => 'redis',
+            'driver' => 'predis',
             'connection' => 'cache',
             'lock_connection' => 'default',
         ],

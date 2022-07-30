@@ -12,9 +12,9 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('notification_template_data', function (Blueprint $table) {
+        Schema::create('movie_data', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('notification_template_id')->constrained('notification_templates')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('movie_id')->constrained('movies')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('key');
             $table->longText('value');
             $table->timestamps();
@@ -28,6 +28,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('notification_template_data');
+        Schema::dropIfExists('movie_data');
     }
 };
