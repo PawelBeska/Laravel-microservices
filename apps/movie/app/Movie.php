@@ -22,6 +22,11 @@ class Movie extends Model
         return $this->hasMany(MovieData::class);
     }
 
+    public function dataMutated()
+    {
+        return $this->hasMany(MovieData::class)->pluck('value','key');
+    }
+
     public function provider(): BelongsTo
     {
         return $this->belongsTo(MovieProvider::class);

@@ -43,7 +43,7 @@ $router->group([
 
     // NOTIFICATION TEMPLATES SECTION
     $router->group(['prefix' => 'notification-templates/'], function ($router) {
-        apiResource($router, 'v1\\RoleController', 'notification-template', 'notificationTemplate');
+        apiResource($router, 'v1\\NotificationTemplateController', 'notification-template', 'notificationTemplate');
     });
 
     // ROUTE STATISTICS SECTION

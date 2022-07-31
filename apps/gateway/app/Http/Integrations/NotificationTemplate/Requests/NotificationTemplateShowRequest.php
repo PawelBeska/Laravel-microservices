@@ -30,7 +30,7 @@ class NotificationTemplateShowRequest extends SaloonRequest
      */
     public function defineEndpoint(): string
     {
-        return '/' . request()->role;
+        return '/' . request()->notificationTemplate;
     }
 
 }
